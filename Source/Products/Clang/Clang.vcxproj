@@ -100,6 +100,8 @@
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="Diagnostic.cpp" />
+    <ClCompile Include="File.cpp" />
+    <ClCompile Include="SourceLocation.cpp" />
     <ClCompile Include="TranslationUnit.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +111,9 @@
     <ClInclude Include="CursorVisitorCallback.h" />
     <ClInclude Include="CursorVisitResult.h" />
     <ClInclude Include="Diagnostic.h" />
+    <ClInclude Include="File.h" />
+    <ClInclude Include="Location.h" />
+    <ClInclude Include="SourceLocation.h" />
     <ClInclude Include="TranslationUnit.h" />
     <ClInclude Include="TranslationUnitFlags.h" />
   </ItemGroup>

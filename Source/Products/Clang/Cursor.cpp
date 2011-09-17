@@ -19,6 +19,7 @@
 // THE SOFTWARE.
 
 #include "Cursor.h"
+#include "SourceLocation.h"
 #include "TranslationUnit.h"
 
 using namespace System;
@@ -70,6 +71,11 @@ namespace Clang {
 		}
 
 		return cachedSpelling;
+	}
+
+	SourceLocation Cursor::Location::get() {
+		CXSourceLocation location = clang_getCursorLocation(Native);
+		return SourceLocation(location);
 	}
 
 	bool Cursor::IsUnexposed::get() {

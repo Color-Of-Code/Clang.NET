@@ -20,60 +20,15 @@
 
 #pragma once
 
-#include "Index.h"
-#include "CursorKind.h"
-#include "CursorVisitorCallback.h"
-#include "CursorVisitResult.h"
-
 namespace Clang {
-	ref class TranslationUnit;
-	value class SourceLocation;
+	value class File;
 
-	public ref class Cursor
+	public value class Location
 	{
 	public:
-		Cursor(TranslationUnit^ translationUnit);
-
-		property CursorKind Kind {
-			CursorKind get();
-		}
-
-		property System::String^ Name {
-			System::String^ get(); 
-		}
-
-		property System::String^ Spelling {
-			System::String^ get(); 
-		}
-
-		property SourceLocation Location {
-			SourceLocation get();
-		}
-
-		property bool IsUnexposed {
-			bool get();
-		}
-
-		bool VisitChildren(CursorVisitorCallback^ visitor);
-
-	internal:
-		Cursor(const CXCursor& native);
-
-		property CXCursor Native {
-			CXCursor get();
-		}
-
-	private:
-		System::String^ cachedName;
-		System::String^ cachedSpelling;
-		
-		// CXCursor is a structure, and thus cannot be directly contained
-		// inside a reference type. Instead, the members of CXCursor are
-		// directly contained in this class and CXCursor instances are
-		// rebuilt as needed.
-		CXCursorKind kind;
-		void* data0;
-		void* data1;
-		void* data2;
+		Clang::File File;
+		int Line;
+		int Column;
+		int Offset;
 	};
 }
