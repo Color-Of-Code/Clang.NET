@@ -3,5 +3,6 @@
 *.suo
 *.user
 *.csproj.user
+Artifact/
 bin/
 obj/
