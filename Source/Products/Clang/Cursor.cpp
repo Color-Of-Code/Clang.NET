@@ -20,6 +20,7 @@
 
 #include "Cursor.h"
 #include "SourceLocation.h"
+#include "SourceRange.h"
 #include "TranslationUnit.h"
 
 using namespace System;
@@ -76,6 +77,11 @@ namespace Clang {
 	SourceLocation Cursor::Location::get() {
 		CXSourceLocation location = clang_getCursorLocation(Native);
 		return SourceLocation(location);
+	}
+
+	SourceRange Cursor::Extent::get() {
+		CXSourceRange location = clang_getCursorExtent(Native);
+		return SourceRange(location);
 	}
 
 	bool Cursor::IsUnexposed::get() {

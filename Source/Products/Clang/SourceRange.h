@@ -21,64 +21,35 @@
 #pragma once
 
 #include "Index.h"
-#include "CursorKind.h"
-#include "CursorVisitorCallback.h"
-#include "CursorVisitResult.h"
 
 namespace Clang {
-	ref class TranslationUnit;
 	value class SourceLocation;
-	value class SourceRange;
 
-	public ref class Cursor
+	public value class SourceRange
 	{
 	public:
-		Cursor(TranslationUnit^ translationUnit);
-
-		property CursorKind Kind {
-			CursorKind get();
-		}
-
-		property System::String^ Name {
-			System::String^ get(); 
-		}
-
-		property System::String^ Spelling {
-			System::String^ get(); 
-		}
-
-		property SourceLocation Location {
+		property SourceLocation Start {
 			SourceLocation get();
 		}
 
-		property SourceRange Extent {
-			SourceRange get();
+		property SourceLocation End {
+			SourceLocation get();
 		}
-
-		property bool IsUnexposed {
-			bool get();
-		}
-
-		bool VisitChildren(CursorVisitorCallback^ visitor);
 
 	internal:
-		Cursor(const CXCursor& native);
+		SourceRange(const CXSourceRange& native);
 
-		property CXCursor Native {
-			CXCursor get();
+		property CXSourceRange Native {
+			CXSourceRange get();
 		}
 
 	private:
-		System::String^ cachedName;
-		System::String^ cachedSpelling;
-		
-		// CXCursor is a structure, and thus cannot be directly contained
-		// inside a reference type. Instead, the members of CXCursor are
-		// directly contained in this class and CXCursor instances are
-		// rebuilt as needed.
-		CXCursorKind kind;
-		void* data0;
-		void* data1;
-		void* data2;
+		// CXSourceRange is a structure, and thus cannot be directly contained
+		// inside a managed type. Instead, the members are directly contained in
+		// this class and the native object is rebuilt as needed.
+		void* pointer0;
+		void* pointer1;
+		unsigned int integer0;
+		unsigned int integer1;
 	};
 }
