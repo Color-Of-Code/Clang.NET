@@ -31,6 +31,7 @@ namespace Clang {
 	{
 	public:
 		TranslationUnit(Context^ context, System::String^ file, TranslationUnitFlags flags);
+		TranslationUnit(Context^ context, System::String^ file, TranslationUnitFlags flags, System::Collections::Generic::IEnumerable<System::String^>^ commandLineArguments);
 		~TranslationUnit();
 
 		property System::Collections::ObjectModel::ReadOnlyCollection<Diagnostic^>^ Diagnostics {

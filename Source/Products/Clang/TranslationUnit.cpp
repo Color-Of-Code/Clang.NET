@@ -22,6 +22,8 @@
 #include "Context.h"
 #include "Diagnostic.h"
 
+#include <vector>
+
 using namespace System;
 using namespace System::Collections::Generic;
 using namespace System::Collections::ObjectModel;
@@ -41,6 +43,34 @@ namespace Clang {
 			0,
 			static_cast<unsigned int>(flags)
 		);
+	}
+
+	TranslationUnit::TranslationUnit(Context^ context, String^ file, TranslationUnitFlags flags, IEnumerable<System::String^>^ commandLineArguments) {
+		array<System::Byte>^ fileBytes = ASCIIEncoding::ASCII->GetBytes(file);
+		pin_ptr<unsigned char> pinnedFile = &fileBytes[0];
+
+		std::vector<const char*> arguments;
+		for each(System::String^ argument in commandLineArguments) {
+			array<System::Byte>^ bytes = ASCIIEncoding::ASCII->GetBytes(argument);
+			char* converted = new char[bytes->Length];
+			for(int index = 0; index < bytes->Length; ++index)
+				converted[index] = bytes[index];
+			arguments.push_back(converted);
+		}
+
+		native = clang_parseTranslationUnit(
+			context->Native,
+			reinterpret_cast<const char*>(pinnedFile),
+			&arguments[0],
+			arguments.size(),
+			0,
+			0,
+			static_cast<unsigned int>(flags)
+		);
+
+		for(std::size_t index = 0; index < arguments.size(); ++index) {
+			delete[] arguments[index];
+		}
 	}
 
 	TranslationUnit::~TranslationUnit() {
