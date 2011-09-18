@@ -25,10 +25,10 @@
 namespace Clang {
 	public enum class CursorKind {
 		UnexposedDeclaration = CXCursor_UnexposedDecl,
-		StructDeclaration = CXCursor_StructDecl,
+		StructureDeclaration = CXCursor_StructDecl,
 		UnionDeclaration = CXCursor_UnionDecl,
 		ClassDeclaration = CXCursor_ClassDecl,
-		EnumDeclaration = CXCursor_EnumDecl,
+		EnumerationDeclaration = CXCursor_EnumDecl,
 		FieldDeclaration = CXCursor_FieldDecl,
 		EnumerationConstantDeclaration = CXCursor_EnumConstantDecl,
 		FunctionDeclaration = CXCursor_FunctionDecl,
@@ -46,7 +46,7 @@ namespace Clang {
 		TypedefDeclaration = CXCursor_TypedefDecl,
 		CppMethod = CXCursor_CXXMethod,
 		Namespace = CXCursor_Namespace,
-		LinkageSpec = CXCursor_LinkageSpec,
+		LinkageSpecifier = CXCursor_LinkageSpec,
 		Constructor = CXCursor_Constructor,
 		Destructor = CXCursor_Destructor,
 		ConversionFunction = CXCursor_ConversionFunction,
