@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Context.h" />
+    <ClInclude Include="ContextFlags.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="CursorKind.h" />
     <ClInclude Include="CursorLinkage.h" />

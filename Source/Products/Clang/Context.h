@@ -21,12 +21,14 @@
 #pragma once
 
 #include "Index.h"
+#include "ContextFlags.h"
 
 namespace Clang {
 	public ref class Context
 	{
 	public:
 		Context();
+		Context(ContextFlags flags);
 		~Context();
 
 	internal:
@@ -36,6 +38,8 @@ namespace Clang {
 
 	private:
 		!Context();
+
+		void Construct(ContextFlags flags);
 
 		CXIndex native;
 	};

@@ -18,35 +18,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "Context.h"
+#pragma once
 
-using namespace System;
+#include "Index.h"
 
 namespace Clang {
-	Context::Context() {
-		Construct(ContextFlags::None);
-	}
-
-	Context::Context(ContextFlags flags) {
-		Construct(flags);
-	}
-
-	Context::~Context() {
-		clang_disposeIndex(Native);
-	}
-
-	Context::!Context() {
-		clang_disposeIndex(Native);
-	}
-
-	void Context::Construct(ContextFlags flags) {
-		int excludeDeclarationsFromPch = static_cast<int>(flags & ContextFlags::ExcludeDeclarationsFromPch) != 0;
-		int displayDiagnostics = static_cast<int>(flags & ContextFlags::DisplayDiagnostics) != 0;
-
-		native = clang_createIndex(excludeDeclarationsFromPch, displayDiagnostics);
-	}
-
-	CXIndex Context::Native::get() {
-		return native;
-	}
+	[System::Flags]
+	public enum class ContextFlags {
+		None = 0,
+		ExcludeDeclarationsFromPch = 1 << 0,
+		DisplayDiagnostics = 1 << 1,
+	};
 }
