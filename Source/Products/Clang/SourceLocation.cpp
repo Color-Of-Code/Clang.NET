@@ -19,7 +19,7 @@
 // THE SOFTWARE.
 
 #include "SourceLocation.h"
-#include "File.h"
+#include "SourceFile.h"
 #include "Location.h"
 
 using namespace System;
@@ -39,7 +39,7 @@ namespace Clang {
 		clang_getSpellingLocation(Native, &file, &line, &column, &offset);
 		
 		Location result;
-		result.File = File(file);
+		result.File = SourceFile(file);
 		result.Line = line;
 		result.Column = column;
 		result.Offset = offset;
@@ -54,7 +54,7 @@ namespace Clang {
 		clang_getExpansionLocation(Native, &file, &line, &column, &offset);
 		
 		Location result;
-		result.File = File(file);
+		result.File = SourceFile(file);
 		result.Line = line;
 		result.Column = column;
 		result.Offset = offset;

@@ -18,27 +18,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#pragma once
+#include "SourceFile.h"
 
-#include "Index.h"
+using namespace System;
 
 namespace Clang {
-	public value class File
-	{
-	public:
-		property System::String^ Path {
-			System::String^ get();
+	SourceFile::SourceFile(const CXFile& native) : native(native) {
+	}
+
+	String^ SourceFile::Path::get() {
+		if(cachedPath == nullptr) {
+			CXString path = clang_getFileName(Native);
+			const char* bytes = clang_getCString(path);
+			cachedPath = gcnew String(bytes);
+			clang_disposeString(path);
 		}
 
-	internal:
-		File(const CXFile& native);
+		return cachedPath;
+	}
 
-		property CXFile Native {
-			CXFile get();
-		}
-
-	private:
-		System::String^ cachedPath;
-		CXFile native;
-	};
+	CXFile SourceFile::Native::get() {
+		return native;
+	}
 }

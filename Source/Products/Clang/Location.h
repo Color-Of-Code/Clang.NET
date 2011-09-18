@@ -21,12 +21,12 @@
 #pragma once
 
 namespace Clang {
-	value class File;
+	value class SourceFile;
 
 	public value class Location
 	{
 	public:
-		Clang::File File;
+		SourceFile File;
 		int Line;
 		int Column;
 		int Offset;

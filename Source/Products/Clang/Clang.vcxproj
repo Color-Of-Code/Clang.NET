@@ -100,7 +100,7 @@
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="Diagnostic.cpp" />
-    <ClCompile Include="File.cpp" />
+    <ClCompile Include="SourceFile.cpp" />
     <ClCompile Include="SourceLocation.cpp" />
     <ClCompile Include="SourceRange.cpp" />
     <ClCompile Include="TranslationUnit.cpp" />
@@ -113,7 +113,7 @@
     <ClInclude Include="CursorVisitorCallback.h" />
     <ClInclude Include="CursorVisitResult.h" />
     <ClInclude Include="Diagnostic.h" />
-    <ClInclude Include="File.h" />
+    <ClInclude Include="SourceFile.h" />
     <ClInclude Include="Location.h" />
     <ClInclude Include="SourceLocation.h" />
     <ClInclude Include="SourceRange.h" />
