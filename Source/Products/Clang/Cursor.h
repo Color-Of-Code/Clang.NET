@@ -64,6 +64,9 @@ namespace Clang {
 			bool get();
 		}
 
+		Cursor^ GetLexicalParent();
+		Cursor^ GetSemanticParent();
+
 		bool VisitChildren(CursorVisitorCallback^ visitor);
 
 	internal:

@@ -96,6 +96,14 @@ namespace Clang {
 		return static_cast<CursorKind>(kind);
 	}
 
+	Cursor^ Cursor::GetLexicalParent() {
+		return gcnew Cursor(clang_getCursorLexicalParent(Native));
+	}
+
+	Cursor^ Cursor::GetSemanticParent() {
+		return gcnew Cursor(clang_getCursorSemanticParent(Native));
+	}
+
 	bool Cursor::VisitChildren(CursorVisitorCallback^ visitor) {
 		GCHandle handle = GCHandle::Alloc(visitor);
 		try {
