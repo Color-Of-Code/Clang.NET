@@ -109,6 +109,7 @@
     <ClInclude Include="Context.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="CursorKind.h" />
+    <ClInclude Include="CursorLinkage.h" />
     <ClInclude Include="CursorVisitorCallback.h" />
     <ClInclude Include="CursorVisitResult.h" />
     <ClInclude Include="Diagnostic.h" />

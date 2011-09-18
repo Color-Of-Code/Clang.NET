@@ -22,6 +22,7 @@
 
 #include "Index.h"
 #include "CursorKind.h"
+#include "CursorLinkage.h"
 #include "CursorVisitorCallback.h"
 #include "CursorVisitResult.h"
 
@@ -45,6 +46,10 @@ namespace Clang {
 
 		property System::String^ Spelling {
 			System::String^ get(); 
+		}
+
+		property CursorLinkage Linkage {
+			CursorLinkage get(); 
 		}
 
 		property SourceLocation Location {

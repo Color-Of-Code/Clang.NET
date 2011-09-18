@@ -74,6 +74,10 @@ namespace Clang {
 		return cachedSpelling;
 	}
 
+	CursorLinkage Cursor::Linkage::get() {
+		return static_cast<CursorLinkage>(clang_getCursorLinkage(Native));
+	}
+
 	SourceLocation Cursor::Location::get() {
 		CXSourceLocation location = clang_getCursorLocation(Native);
 		return SourceLocation(location);
