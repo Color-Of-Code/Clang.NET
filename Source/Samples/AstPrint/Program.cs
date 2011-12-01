@@ -19,27 +19,43 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using Clang;
 
 namespace AstPrint {
 	class Program {
-		static void Main(string[] arguments) {
-			using (var context = new Context())
-			using (var translationUnit = new TranslationUnit(context, "Demo.cpp", TranslationUnitFlags.None)) {
-				if (translationUnit.Diagnostics.Count > 0) {
-					foreach (var diagnostic in translationUnit.Diagnostics) {
-						Console.WriteLine(diagnostic.Spelling);
+
+		public static readonly String FILENAME = "Demo.c";
+
+		static void Main (string[] arguments)
+		{
+			using (var context = new Context ()) {
+				
+				// example of use of arguments
+				List<string> parameters = new List<string>();
+				parameters.Add("-std=c89"); // works only for C of course
+
+				using (var translationUnit = new TranslationUnit (context, FILENAME, 
+					TranslationUnitFlags.DetailedPreprocessingRecord,
+					parameters)) {
+					if (translationUnit.Diagnostics.Count > 0) {
+						foreach (var diagnostic in translationUnit.Diagnostics) {
+							Console.WriteLine (diagnostic.Spelling);
+						}
+					} else {
+						new Cursor (translationUnit).VisitChildren (CursorVisitor);
 					}
-				}
-				else {
-					new Cursor(translationUnit).VisitChildren(CursorVisitor);
 				}
 			}
 		}
 
-		static CursorVisitResult CursorVisitor(Cursor cursor, Cursor parent) {
-			if (!cursor.IsUnexposed) {
-				Console.WriteLine("{0} ({1}) [{2}]", cursor.Name, cursor.Spelling, cursor.Kind);
+		static CursorVisitResult CursorVisitor (Cursor cursor, Cursor parent)
+		{
+			if (cursor.Location.SpellingPosition.File.Path == FILENAME) {
+				Console.WriteLine ("Line {3}/{4}: {0} ({1}) [{2}]",
+					cursor.Name, cursor.Spelling, cursor.Kind,
+					cursor.Location.SpellingPosition.Line,
+					cursor.Location.SpellingPosition.Column);
 			}
 
 			return CursorVisitResult.Recurse;
