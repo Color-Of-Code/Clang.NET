@@ -52,9 +52,10 @@ namespace Clang {
 		std::vector<const char*> arguments;
 		for each(System::String^ argument in commandLineArguments) {
 			array<System::Byte>^ bytes = ASCIIEncoding::ASCII->GetBytes(argument);
-			char* converted = new char[bytes->Length];
+			char* converted = new char[bytes->Length+1];
 			for(int index = 0; index < bytes->Length; ++index)
 				converted[index] = bytes[index];
+			converted[bytes->Length] = 0;
 			arguments.push_back(converted);
 		}
 
