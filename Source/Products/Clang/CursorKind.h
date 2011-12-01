@@ -88,12 +88,39 @@ namespace Clang {
 		MemberReferenceExpression = CXCursor_MemberRefExpr,
 		CallExpression = CXCursor_CallExpr,
 		ObjectiveCMessageExpression = CXCursor_ObjCMessageExpr,
+		
 		BlockExpression = CXCursor_BlockExpr,
+
+		IntegerLiteral = CXCursor_IntegerLiteral,
+		FloatingLiteral = CXCursor_FloatingLiteral,
+		ImaginaryLiteral= CXCursor_ImaginaryLiteral,
+		StringLiteral = CXCursor_StringLiteral,
+		CharacterLiteral = CXCursor_CharacterLiteral,
+
+		InitializerList = CXCursor_InitListExpr,
+
 		LastExpression = CXCursor_LastExpr,
 		FirstStatement = CXCursor_FirstStmt,
-		UnexposedStatement = CXCursor_UnexposedStmt,
+
+		UnexposedStatement = CXCursor_UnexposedStmt, // 200
 		LabelStatement = CXCursor_LabelStmt,
+		CompoundStatement = CXCursor_CompoundStmt,
+		CaseStatement = CXCursor_CaseStmt,
+		DefaultStatement = CXCursor_DefaultStmt,
+		IfStatement = CXCursor_IfStmt,
+		SwitchStatement = CXCursor_SwitchStmt,
+		WhileStatement = CXCursor_WhileStmt,
+		DoStatement = CXCursor_DoStmt,
+		ForStatement = CXCursor_ForStmt,
+		GotoStatement = CXCursor_GotoStmt,
+		IndirectGotoStatement = CXCursor_IndirectGotoStmt,
+		ContinueStatement = CXCursor_ContinueStmt,
+		BreakStatement = CXCursor_BreakStmt,
+		ReturnStatement = CXCursor_ReturnStmt,
+		AssemblyStatement = CXCursor_AsmStmt,
+
 		LastStatement = CXCursor_LastStmt,
+
 		TranslationUnit = CXCursor_TranslationUnit,
 		FirstAttribute = CXCursor_FirstAttr,
 		UnexposedAttribute = CXCursor_UnexposedAttr,
