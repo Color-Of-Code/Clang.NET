@@ -33,7 +33,7 @@ namespace Clang {
 		EnumerationConstantDeclaration = CXCursor_EnumConstantDecl,
 		FunctionDeclaration = CXCursor_FunctionDecl,
 		VariableDeclaration = CXCursor_VarDecl,
-		ParmeterDeclaration = CXCursor_ParmDecl,
+		ParameterDeclaration = CXCursor_ParmDecl,
 		ObjectiveCInterfaceDeclaration = CXCursor_ObjCInterfaceDecl,
 		ObjectiveCCategoryDeclaration = CXCursor_ObjCCategoryDecl,
 		ObjectiveCProtocolDeclaration = CXCursor_ObjCProtocolDecl,
@@ -64,6 +64,7 @@ namespace Clang {
 		ObjectiveCDynamicDeclaration = CXCursor_ObjCDynamicDecl,
 		FirstDeclaration = CXCursor_FirstDecl,
 		LastDeclaration = CXCursor_LastDecl,
+
 		FirstReference = CXCursor_FirstRef,
 		ObjectiveCSuperClassReference = CXCursor_ObjCSuperClassRef,
 		ObjectiveCProtocolRefference = CXCursor_ObjCProtocolRef,
@@ -82,26 +83,57 @@ namespace Clang {
 		NotImplemented = CXCursor_NotImplemented,
 		InvalidCode = CXCursor_InvalidCode,
 		LastInvalid = CXCursor_LastInvalid,
-		FirstExpression = CXCursor_FirstExpr,
+
+		// Expressions - 100
+		//FirstExpression = CXCursor_FirstExpr,
 		UnexposedExpression = CXCursor_UnexposedExpr,
 		DeclarationReferenceExpression = CXCursor_DeclRefExpr,
 		MemberReferenceExpression = CXCursor_MemberRefExpr,
 		CallExpression = CXCursor_CallExpr,
 		ObjectiveCMessageExpression = CXCursor_ObjCMessageExpr,
-		
 		BlockExpression = CXCursor_BlockExpr,
-
 		IntegerLiteral = CXCursor_IntegerLiteral,
 		FloatingLiteral = CXCursor_FloatingLiteral,
 		ImaginaryLiteral= CXCursor_ImaginaryLiteral,
 		StringLiteral = CXCursor_StringLiteral,
 		CharacterLiteral = CXCursor_CharacterLiteral,
+		ParenthesizedExpression = CXCursor_ParenExpr,
+		UnaryOperator = CXCursor_UnaryOperator,
+		ArraySubscriptExpression = CXCursor_ArraySubscriptExpr,
+		BinaryOperator = CXCursor_BinaryOperator,
+		CompoundAssignOperator = CXCursor_CompoundAssignOperator,
+		ConditionalOperator = CXCursor_ConditionalOperator, // ?: ternary operator
+		CStyleCastExpression = CXCursor_CStyleCastExpr,
+		CompoundLiteralExpression = CXCursor_CompoundLiteralExpr,
+		InitializerListExpression = CXCursor_InitListExpr,
+		GnuAddressLabelExpression = CXCursor_AddrLabelExpr, // GNU address (&&label)
+		GnuStatementExpression = CXCursor_StmtExpr,			// ({int X=4; X;})
+		GenericSelectionExpression = CXCursor_GenericSelectionExpr,
+		GnuNullExpression = CXCursor_GNUNullExpr, // GNU __null extension
+		CxxStaticCastExpression = CXCursor_CXXStaticCastExpr,
+		CxxDynamicCastExpression = CXCursor_CXXDynamicCastExpr,
+		CxxReinterpretCastExpression = CXCursor_CXXReinterpretCastExpr,
+		CxxConstCastExpression = CXCursor_CXXConstCastExpr,
+		CxxFunctionalCastExpression = CXCursor_CXXFunctionalCastExpr,
+		CxxTypeidExpression = CXCursor_CXXTypeidExpr,
+		CxxBooleanLiteral = CXCursor_CXXBoolLiteralExpr,
+		CxxNullPointerLiteral = CXCursor_CXXNullPtrLiteralExpr,
+		CxxThisExpression = CXCursor_CXXThisExpr,
+		CxxThrowExpression = CXCursor_CXXThrowExpr,
+		CxxNewExpression = CXCursor_CXXNewExpr,
+		CxxDeleteExpression = CXCursor_CXXDeleteExpr,
+		UnaryExpression = CXCursor_UnaryExpr,
+		ObjectiveCStringLiteral = CXCursor_ObjCStringLiteral,
+		ObjectiveCEncodeExpression = CXCursor_ObjCEncodeExpr,
+		ObjectiveCSelectorExpression = CXCursor_ObjCSelectorExpr,
+		ObjectiveCProtocolExpression = CXCursor_ObjCProtocolExpr,
+		ObjectiveCBridgedCastExpression = CXCursor_ObjCBridgedCastExpr,
+		PackExpansionExpression = CXCursor_PackExpansionExpr,
+		SizeOfPackExpression = CXCursor_SizeOfPackExpr,
+		//LastExpression = CXCursor_LastExpr,
 
-		InitializerList = CXCursor_InitListExpr,
-
-		LastExpression = CXCursor_LastExpr,
-		FirstStatement = CXCursor_FirstStmt,
-
+		// Statements
+		//FirstStatement = CXCursor_FirstStmt,
 		UnexposedStatement = CXCursor_UnexposedStmt, // 200
 		LabelStatement = CXCursor_LabelStmt,
 		CompoundStatement = CXCursor_CompoundStmt,
@@ -118,8 +150,7 @@ namespace Clang {
 		BreakStatement = CXCursor_BreakStmt,
 		ReturnStatement = CXCursor_ReturnStmt,
 		AssemblyStatement = CXCursor_AsmStmt,
-
-		LastStatement = CXCursor_LastStmt,
+		//LastStatement = CXCursor_LastStmt,
 
 		TranslationUnit = CXCursor_TranslationUnit,
 		FirstAttribute = CXCursor_FirstAttr,
@@ -128,12 +159,14 @@ namespace Clang {
 		InterfaceBuilderOutletAttribute = CXCursor_IBOutletAttr,
 		InterfaceBuilderOutletCollectionAttribute = CXCursor_IBOutletCollectionAttr,
 		LastAttribute = CXCursor_LastAttr,
+
+		// preprocessing
 		PreprocessingDirective = CXCursor_PreprocessingDirective,
 		MacroDefinition = CXCursor_MacroDefinition,
 		MacroExpansion = CXCursor_MacroExpansion,
 		MacroInstantiation = CXCursor_MacroInstantiation,
 		InclusionDirective = CXCursor_InclusionDirective,
-		FirstPreprocessing = CXCursor_FirstPreprocessing,
-		LastPreprocessing = CXCursor_LastPreprocessing,
+		//FirstPreprocessing = CXCursor_FirstPreprocessing,
+		//LastPreprocessing = CXCursor_LastPreprocessing,
 	};
 }

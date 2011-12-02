@@ -37,9 +37,11 @@ namespace {
 }
 
 namespace Clang {
+
 	Cursor::Cursor(TranslationUnit^ translationUnit) {
 		CXCursor native = clang_getTranslationUnitCursor(translationUnit->Native);
 		kind = native.kind;
+		xdata = native.xdata;
 		data0 = native.data[0];
 		data1 = native.data[1];
 		data2 = native.data[2];
@@ -47,6 +49,7 @@ namespace Clang {
 
 	Cursor::Cursor(const CXCursor& native) {
 		kind = native.kind;
+		xdata = native.xdata;
 		data0 = native.data[0];
 		data1 = native.data[1];
 		data2 = native.data[2];
@@ -92,6 +95,54 @@ namespace Clang {
 		return clang_isUnexposed(kind) != 0;
 	}
 
+	bool Cursor::IsDeclaration::get() {
+		return clang_isDeclaration(kind) != 0;
+	}
+
+	bool Cursor::IsReference::get() {
+		return clang_isReference(kind) != 0;
+	}
+
+	bool Cursor::IsExpression::get() {
+		return clang_isExpression(kind) != 0;
+	}
+
+	bool Cursor::IsStatement::get() {
+		return clang_isStatement(kind) != 0;
+	}
+
+	bool Cursor::IsAttribute::get() {
+		return clang_isAttribute(kind) != 0;
+	}
+
+	bool Cursor::IsInvalid::get() {
+		return clang_isInvalid(kind) != 0;
+	}
+
+	bool Cursor::IsTranslationUnit::get() {
+		return clang_isTranslationUnit(kind) != 0;
+	}
+
+	bool Cursor::IsPreprocessing::get() {
+		return clang_isPreprocessing(kind) != 0;
+	}
+
+	bool Cursor::IsVirtualBase::get() {
+		return clang_isVirtualBase(Native) != 0;
+	}
+
+	bool Cursor::IsCursorDefinition::get() {
+		return clang_isCursorDefinition(Native) != 0;
+	}
+
+	bool Cursor::IsCxxMethodStatic::get() {
+		return clang_CXXMethod_isStatic(Native) != 0;
+	}
+
+	bool Cursor::IsCxxMethodVirtual::get() {
+		return clang_CXXMethod_isVirtual(Native) != 0;
+	}
+
 	CursorKind Cursor::Kind::get() {
 		return static_cast<CursorKind>(kind);
 	}
@@ -102,6 +153,22 @@ namespace Clang {
 
 	Cursor^ Cursor::GetSemanticParent() {
 		return gcnew Cursor(clang_getCursorSemanticParent(Native));
+	}
+
+	Type^ Cursor::Type::get() {
+		CXType t = clang_getCursorType(Native);
+		if (t.kind == CXType_Invalid)
+			return nullptr;
+		else
+			return gcnew Clang::Type(t);
+	}
+
+	Type^ Cursor::ResultType::get() {
+		CXType t = clang_getCursorResultType(Native);
+		if (t.kind == CXType_Invalid)
+			return nullptr;
+		else
+			return gcnew Clang::Type(t);
 	}
 
 	bool Cursor::VisitChildren(CursorVisitorCallback^ visitor) {
@@ -117,6 +184,7 @@ namespace Clang {
 	CXCursor Cursor::Native::get() {
 		CXCursor native;
 		native.kind = kind;
+		native.xdata = xdata;
 		native.data[0] = data0;
 		native.data[1] = data1;
 		native.data[2] = data2;

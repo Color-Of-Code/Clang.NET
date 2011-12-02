@@ -37,6 +37,12 @@ namespace Clang {
 		return cachedPath;
 	}
 
+	DateTime^ SourceFile::LastModificationTime::get() {
+		time_t time = clang_getFileTime(Native);
+		long long filetime = time * 10000000LL + 116444736000000000LL;
+		return DateTime::FromFileTimeUtc(filetime);
+	}
+
 	CXFile SourceFile::Native::get() {
 		return native;
 	}

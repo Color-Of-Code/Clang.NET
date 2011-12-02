@@ -25,9 +25,11 @@
 #include "CursorLinkage.h"
 #include "CursorVisitorCallback.h"
 #include "CursorVisitResult.h"
+#include "Type.h"
 
 namespace Clang {
 	ref class TranslationUnit;
+	ref class Type;
 	value class SourceLocation;
 	value class SourceRange;
 
@@ -64,10 +66,75 @@ namespace Clang {
 			bool get();
 		}
 
+		property bool IsDeclaration {
+			bool get();
+		}
+
+		property bool IsReference {
+			bool get();
+		}
+
+		property bool IsExpression {
+			bool get();
+		}
+
+		property bool IsStatement {
+			bool get();
+		}
+
+		property bool IsAttribute {
+			bool get();
+		}
+
+		property bool IsInvalid {
+			bool get();
+		}
+
+		property bool IsTranslationUnit {
+			bool get();
+		}
+
+		property bool IsPreprocessing {
+			bool get();
+		}
+
+		property bool IsVirtualBase {
+			bool get();
+		}
+
+		property bool IsCursorDefinition {
+			bool get();
+		}
+
+		property bool IsCxxMethodStatic {
+			bool get();
+		}
+
+		property bool IsCxxMethodVirtual {
+			bool get();
+		}
+
 		Cursor^ GetLexicalParent();
 		Cursor^ GetSemanticParent();
 
 		bool VisitChildren(CursorVisitorCallback^ visitor);
+
+		property Clang::Type^ Type {
+			Clang::Type^ get();
+		}
+
+		property Clang::Type^ ResultType {
+			Clang::Type^ get();
+		}
+
+		//TODO:
+		//CXString clang_getDeclObjCTypeEncoding(CXCursor C);
+		//enum CX_CXXAccessSpecifier clang_getCXXAccessSpecifier(CXCursor);
+		//unsigned clang_getNumOverloadedDecls(CXCursor cursor);
+		//CXCursor clang_getOverloadedDecl(CXCursor cursor, unsigned index);
+		//CXType clang_getIBOutletCollectionType(CXCursor);
+		//CXString clang_getCursorUSR(CXCursor);
+		//enum CXCursorKind clang_getTemplateCursorKind(CXCursor C);
 
 	internal:
 		Cursor(const CXCursor& native);
@@ -85,6 +152,7 @@ namespace Clang {
 		// directly contained in this class and CXCursor instances are
 		// rebuilt as needed.
 		CXCursorKind kind;
+		int xdata;
 		void* data0;
 		void* data1;
 		void* data2;

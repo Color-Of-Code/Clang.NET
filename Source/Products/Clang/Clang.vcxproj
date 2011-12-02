@@ -104,6 +104,7 @@
     <ClCompile Include="SourceLocation.cpp" />
     <ClCompile Include="SourceRange.cpp" />
     <ClCompile Include="TranslationUnit.cpp" />
+    <ClCompile Include="Type.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Context.h" />
@@ -120,6 +121,8 @@
     <ClInclude Include="SourceRange.h" />
     <ClInclude Include="TranslationUnit.h" />
     <ClInclude Include="TranslationUnitFlags.h" />
+    <ClInclude Include="Type.h" />
+    <ClInclude Include="TypeKind.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

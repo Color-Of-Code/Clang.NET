@@ -1,4 +1,4 @@
-// Copyright (c) 2011 Josh Petrie
+// Copyright (c) 2011 Jaap de Haan
 //	
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,28 +21,67 @@
 #pragma once
 
 #include "Index.h"
+#include "TypeKind.h"
 
 namespace Clang {
-	public value class SourceFile
+
+	public ref class Type
 	{
 	public:
-		property System::String^ Path {
-			System::String^ get();
+		property TypeKind Kind {
+			TypeKind get();
 		}
 
-		property System::DateTime^ LastModificationTime {
-			System::DateTime^ get();
+		property Clang::Type^ PointeeType {
+			Clang::Type^ get();
 		}
+
+		property Clang::Type^ ResultType {
+			Clang::Type^ get();
+		}
+
+		property Clang::Type^ CanonicalType {
+			Clang::Type^ get();
+		}
+
+		property Clang::Type^ ArrayElementType {
+			Clang::Type^ get();
+		}
+
+		property bool IsConst {
+			bool get();
+		}
+
+		property bool IsVolatile {
+			bool get();
+		}
+
+		property bool IsRestrict {
+			bool get();
+		}
+
+		//TODO:
+		//unsigned clang_equalTypes(CXType A, CXType B);
+		//CXCursor clang_getTypeDeclaration(CXType T);
+
+		//CXString clang_getTypeKindSpelling(enum CXTypeKind K);
+		//unsigned clang_isPODType(CXType T);
+		//long long clang_getArraySize(CXType T);
 
 	internal:
-		SourceFile(const CXFile& native);
+		Type(const CXType& native);
 
-		property CXFile Native {
-			CXFile get();
+		property CXType Native {
+			CXType get();
 		}
 
-	private:
-		System::String^ cachedPath;
-		CXFile native;
+	private:		
+		// CXType is a structure, and thus cannot be directly contained
+		// inside a reference type. Instead, the members of CXType are
+		// directly contained in this class and CXType instances are
+		// rebuilt as needed.
+		CXTypeKind kind;
+		void* data0;
+		void* data1;
 	};
 }
