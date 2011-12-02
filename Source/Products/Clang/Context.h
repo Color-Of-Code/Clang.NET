@@ -31,6 +31,10 @@ namespace Clang {
 		Context(ContextFlags flags);
 		~Context();
 
+		property System::String^ ClangVersion {
+			System::String^ get();
+		}
+
 	internal:
 		property CXIndex Native {
 			CXIndex get();

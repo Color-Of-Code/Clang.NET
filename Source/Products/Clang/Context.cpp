@@ -39,6 +39,14 @@ namespace Clang {
 		clang_disposeIndex(Native);
 	}
 
+	String^ Context::ClangVersion::get() {
+		CXString version = clang_getClangVersion();
+		const char* bytes = clang_getCString(version);
+		String^ value = gcnew String(bytes);
+		clang_disposeString(version);
+		return value;
+	}
+
 	void Context::Construct(ContextFlags flags) {
 		int excludeDeclarationsFromPch = static_cast<int>(flags & ContextFlags::ExcludeDeclarationsFromPch) != 0;
 		int displayDiagnostics = static_cast<int>(flags & ContextFlags::DisplayDiagnostics) != 0;
