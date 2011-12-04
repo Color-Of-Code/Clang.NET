@@ -23,7 +23,10 @@
 #include "Index.h"
 
 namespace Clang {
+
 	public enum class CursorKind {
+
+		//FirstDeclaration = CXCursor_FirstDecl,
 		UnexposedDeclaration = CXCursor_UnexposedDecl,
 		StructureDeclaration = CXCursor_StructDecl,
 		UnionDeclaration = CXCursor_UnionDecl,
@@ -34,6 +37,7 @@ namespace Clang {
 		FunctionDeclaration = CXCursor_FunctionDecl,
 		VariableDeclaration = CXCursor_VarDecl,
 		ParameterDeclaration = CXCursor_ParmDecl,
+
 		ObjectiveCInterfaceDeclaration = CXCursor_ObjCInterfaceDecl,
 		ObjectiveCCategoryDeclaration = CXCursor_ObjCCategoryDecl,
 		ObjectiveCProtocolDeclaration = CXCursor_ObjCProtocolDecl,
@@ -43,12 +47,14 @@ namespace Clang {
 		ObjectiveCClassMethodDeclaration = CXCursor_ObjCClassMethodDecl,
 		ObjectiveCImplementationDeclaration = CXCursor_ObjCImplementationDecl,
 		ObjectiveCCategoryImplementationDeclaration = CXCursor_ObjCCategoryImplDecl,
+
 		TypedefDeclaration = CXCursor_TypedefDecl,
 		CppMethod = CXCursor_CXXMethod,
 		Namespace = CXCursor_Namespace,
 		LinkageSpecifier = CXCursor_LinkageSpec,
 		Constructor = CXCursor_Constructor,
 		Destructor = CXCursor_Destructor,
+
 		ConversionFunction = CXCursor_ConversionFunction,
 		TemplateTypeParameter = CXCursor_TemplateTypeParameter,
 		NonTypeTemplateParameter = CXCursor_NonTypeTemplateParameter,
@@ -62,10 +68,10 @@ namespace Clang {
 		TypeAliasDeclaration = CXCursor_TypeAliasDecl,
 		ObjectiveCSynthesizeDeclaration = CXCursor_ObjCSynthesizeDecl,
 		ObjectiveCDynamicDeclaration = CXCursor_ObjCDynamicDecl,
-		FirstDeclaration = CXCursor_FirstDecl,
-		LastDeclaration = CXCursor_LastDecl,
+		CppAccessSpecifier = CXCursor_CXXAccessSpecifier,
+		//LastDeclaration = CXCursor_LastDecl,
 
-		FirstReference = CXCursor_FirstRef,
+		//FirstReference = CXCursor_FirstRef,
 		ObjectiveCSuperClassReference = CXCursor_ObjCSuperClassRef,
 		ObjectiveCProtocolRefference = CXCursor_ObjCProtocolRef,
 		ObjectiveCClassReference = CXCursor_ObjCClassRef,
@@ -76,13 +82,14 @@ namespace Clang {
 		MemberReference = CXCursor_MemberRef,
 		LabelReference = CXCursor_LabelRef,
 		OverloadedDeclReference = CXCursor_OverloadedDeclRef,
-		LastReference = CXCursor_LastRef,
-		FirstInvalid = CXCursor_FirstInvalid,
+		//LastReference = CXCursor_LastRef,
+		
+		//FirstInvalid = CXCursor_FirstInvalid,
 		InvalidFile = CXCursor_InvalidFile,
 		NoDeclarationFound = CXCursor_NoDeclFound,
 		NotImplemented = CXCursor_NotImplemented,
 		InvalidCode = CXCursor_InvalidCode,
-		LastInvalid = CXCursor_LastInvalid,
+		//LastInvalid = CXCursor_LastInvalid,
 
 		// Expressions - 100
 		//FirstExpression = CXCursor_FirstExpr,
@@ -110,18 +117,18 @@ namespace Clang {
 		GnuStatementExpression = CXCursor_StmtExpr,			// ({int X=4; X;})
 		GenericSelectionExpression = CXCursor_GenericSelectionExpr,
 		GnuNullExpression = CXCursor_GNUNullExpr, // GNU __null extension
-		CxxStaticCastExpression = CXCursor_CXXStaticCastExpr,
-		CxxDynamicCastExpression = CXCursor_CXXDynamicCastExpr,
-		CxxReinterpretCastExpression = CXCursor_CXXReinterpretCastExpr,
-		CxxConstCastExpression = CXCursor_CXXConstCastExpr,
-		CxxFunctionalCastExpression = CXCursor_CXXFunctionalCastExpr,
-		CxxTypeidExpression = CXCursor_CXXTypeidExpr,
-		CxxBooleanLiteral = CXCursor_CXXBoolLiteralExpr,
-		CxxNullPointerLiteral = CXCursor_CXXNullPtrLiteralExpr,
-		CxxThisExpression = CXCursor_CXXThisExpr,
-		CxxThrowExpression = CXCursor_CXXThrowExpr,
-		CxxNewExpression = CXCursor_CXXNewExpr,
-		CxxDeleteExpression = CXCursor_CXXDeleteExpr,
+		CppStaticCastExpression = CXCursor_CXXStaticCastExpr,
+		CppDynamicCastExpression = CXCursor_CXXDynamicCastExpr,
+		CppReinterpretCastExpression = CXCursor_CXXReinterpretCastExpr,
+		CppConstCastExpression = CXCursor_CXXConstCastExpr,
+		CppFunctionalCastExpression = CXCursor_CXXFunctionalCastExpr,
+		CppTypeidExpression = CXCursor_CXXTypeidExpr,
+		CppBooleanLiteral = CXCursor_CXXBoolLiteralExpr,
+		CppNullPointerLiteral = CXCursor_CXXNullPtrLiteralExpr,
+		CppThisExpression = CXCursor_CXXThisExpr,
+		CppThrowExpression = CXCursor_CXXThrowExpr,
+		CppNewExpression = CXCursor_CXXNewExpr,
+		CppDeleteExpression = CXCursor_CXXDeleteExpr,
 		UnaryExpression = CXCursor_UnaryExpr,
 		ObjectiveCStringLiteral = CXCursor_ObjCStringLiteral,
 		ObjectiveCEncodeExpression = CXCursor_ObjCEncodeExpr,
@@ -153,20 +160,21 @@ namespace Clang {
 		//LastStatement = CXCursor_LastStmt,
 
 		TranslationUnit = CXCursor_TranslationUnit,
-		FirstAttribute = CXCursor_FirstAttr,
+
+		//FirstAttribute = CXCursor_FirstAttr,
 		UnexposedAttribute = CXCursor_UnexposedAttr,
 		InterfaceBuilderActionAttribute = CXCursor_IBActionAttr,
 		InterfaceBuilderOutletAttribute = CXCursor_IBOutletAttr,
 		InterfaceBuilderOutletCollectionAttribute = CXCursor_IBOutletCollectionAttr,
-		LastAttribute = CXCursor_LastAttr,
+		//LastAttribute = CXCursor_LastAttr,
 
 		// preprocessing
+		//FirstPreprocessing = CXCursor_FirstPreprocessing,
 		PreprocessingDirective = CXCursor_PreprocessingDirective,
 		MacroDefinition = CXCursor_MacroDefinition,
 		MacroExpansion = CXCursor_MacroExpansion,
 		MacroInstantiation = CXCursor_MacroInstantiation,
 		InclusionDirective = CXCursor_InclusionDirective,
-		//FirstPreprocessing = CXCursor_FirstPreprocessing,
 		//LastPreprocessing = CXCursor_LastPreprocessing,
 	};
 }
