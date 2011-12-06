@@ -59,11 +59,12 @@ namespace Clang {
 			arguments.push_back(converted);
 		}
 
+		size_t size = arguments.size();
 		native = clang_parseTranslationUnit(
 			context->Native,
 			reinterpret_cast<const char*>(pinnedFile),
-			&arguments[0],
-			arguments.size(),
+			size==0 ? 0 : &arguments[0],
+			size,
 			0,
 			0,
 			static_cast<unsigned int>(flags)

@@ -26,7 +26,7 @@ using Clang;
 namespace AstPrint {
 	class Program {
 
-		public static readonly String FILENAME = "Demo.cpp";
+		public static readonly String FILENAME = "Demo.c";
 
 		static void Main (string[] arguments)
 		{
@@ -49,6 +49,7 @@ namespace AstPrint {
 						}
 					} else {
 						_depth = 0;
+						_locked = true;
 						new Cursor (translationUnit).VisitChildren (RecursiveCursorVisitor);
 					}
 				}
@@ -56,13 +57,21 @@ namespace AstPrint {
 		}
 
 		private static int _depth = 0;
+		private static bool _locked = true;
 
 		private static CursorVisitResult RecursiveCursorVisitor (Cursor cursor, Cursor parent)
 		{
 			if (cursor.Location.SpellingPosition.File.Path == FILENAME) 
 			{
+				_locked = false;
 				StringBuilder sb = new StringBuilder();
-				sb.Append('\t', _depth);
+				sb.Append("  ");
+				sb.Append(' ', _depth*2);
+				sb.Append("L");
+				sb.Append(cursor.Location.SpellingPosition.Line);
+				sb.Append(" C");
+				sb.Append(cursor.Location.SpellingPosition.Column);
+				sb.Append(" - ");
 				sb.Append(cursor.Kind);
 				sb.Append(" - ");
 				sb.Append(cursor.Spelling);
@@ -71,6 +80,10 @@ namespace AstPrint {
 				cursor.VisitChildren(RecursiveCursorVisitor);
 				_depth--;
 			} else {
+				if (!_locked) {
+					Console.WriteLine ("<inside '{0}'>", cursor.Location.SpellingPosition.File.Path);
+					_locked = true;
+				}
 			}
 
 			return CursorVisitResult.Continue;
