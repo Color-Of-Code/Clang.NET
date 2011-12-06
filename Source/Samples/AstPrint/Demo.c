@@ -1,6 +1,6 @@
 ﻿#include <stdio.h>
 
-int i=1;
+static int i=1;
 
 void solution(int n,char from,char to,char temp)
 {

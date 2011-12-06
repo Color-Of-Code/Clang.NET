@@ -19,21 +19,26 @@
 // THE SOFTWARE.
 
 using System;
+using System.Text;
 using System.Collections.Generic;
 using Clang;
 
 namespace AstPrint {
 	class Program {
 
-		public static readonly String FILENAME = "Demo.c";
+		public static readonly String FILENAME = "Demo.cpp";
 
 		static void Main (string[] arguments)
 		{
 			using (var context = new Context ()) {
 				
+				Console.WriteLine("Information: {0}", context.ClangVersion);
+
 				// example of use of arguments
 				List<string> parameters = new List<string>();
-				parameters.Add("-std=c89"); // works only for C of course
+				
+				//parameters.Add("-std=c89"); // works only for C of course
+				//parameters.Add("-nostdinc");
 
 				using (var translationUnit = new TranslationUnit (context, FILENAME, 
 					TranslationUnitFlags.DetailedPreprocessingRecord,
@@ -43,22 +48,33 @@ namespace AstPrint {
 							Console.WriteLine (diagnostic.Spelling);
 						}
 					} else {
-						new Cursor (translationUnit).VisitChildren (CursorVisitor);
+						_depth = 0;
+						new Cursor (translationUnit).VisitChildren (RecursiveCursorVisitor);
 					}
 				}
 			}
 		}
 
-		static CursorVisitResult CursorVisitor (Cursor cursor, Cursor parent)
+		private static int _depth = 0;
+
+		private static CursorVisitResult RecursiveCursorVisitor (Cursor cursor, Cursor parent)
 		{
-			if (cursor.Location.SpellingPosition.File.Path == FILENAME) {
-				Console.WriteLine ("Line {3}/{4}: {0} ({1}) [{2}]",
-					cursor.Name, cursor.Spelling, cursor.Kind,
-					cursor.Location.SpellingPosition.Line,
-					cursor.Location.SpellingPosition.Column);
+			if (cursor.Location.SpellingPosition.File.Path == FILENAME) 
+			{
+				StringBuilder sb = new StringBuilder();
+				sb.Append('\t', _depth);
+				sb.Append(cursor.Kind);
+				sb.Append(" - ");
+				sb.Append(cursor.Spelling);
+				Console.WriteLine (sb);
+				_depth++;
+				cursor.VisitChildren(RecursiveCursorVisitor);
+				_depth--;
+			} else {
 			}
 
-			return CursorVisitResult.Recurse;
+			return CursorVisitResult.Continue;
 		}
+
 	}
 }

@@ -18,10 +18,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+//#include <stdio.h>
+
+#define TEST 1
+#define SQUARE(x) ((x)*(x))
+
 enum SomeEnum {
 	ValueA = 1,
-	ValueB = ValueA + 2,
+	ValueB = ValueA + 2, ValueC
 };
 
-int main() {
+class A
+{
+public:
+	void test(int param)
+	{
+		methodB(0.0);
+		//printf("test");
+	}
+
+protected:
+	void methodB(double param)
+	{
+	}
+
+};
+
+int main(int argc, const char* argv[]) {
+	return 1;
 }
+
