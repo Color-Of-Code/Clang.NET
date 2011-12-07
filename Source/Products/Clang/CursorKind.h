@@ -184,6 +184,7 @@ namespace Clang {
 		CppFinalAttribute = CXCursor_CXXFinalAttr,
 		CppOverrideAttribute = CXCursor_CXXOverrideAttr,
 		AnnotateAttribute = CXCursor_AnnotateAttr,
+		AssemblyLabelAttribute = CXCursor_AsmLabelAttr,
 		//LastAttribute = CXCursor_LastAttr,
 
 		// preprocessing

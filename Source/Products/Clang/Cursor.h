@@ -22,6 +22,7 @@
 
 #include "Index.h"
 #include "CursorKind.h"
+#include "CursorLanguage.h"
 #include "CursorLinkage.h"
 #include "CursorVisitorCallback.h"
 #include "CursorVisitResult.h"
@@ -112,6 +113,18 @@ namespace Clang {
 
 		property bool IsCxxMethodVirtual {
 			bool get();
+		}
+
+		//property bool IsNull {
+		//	bool get();
+		//}
+
+		property unsigned Hash {
+			unsigned get();
+		}
+
+		property CursorLanguage Language {
+			CursorLanguage get();
 		}
 
 		Cursor^ GetLexicalParent();

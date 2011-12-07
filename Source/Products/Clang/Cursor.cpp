@@ -143,8 +143,20 @@ namespace Clang {
 		return clang_CXXMethod_isVirtual(Native) != 0;
 	}
 
+	//bool Cursor::IsNull::get() {
+	//	return clang_Cursor_isNull(Native) != 0;
+	//}
+
+	unsigned Cursor::Hash::get() {
+		return clang_hashCursor(Native);
+	}
+
 	CursorKind Cursor::Kind::get() {
 		return static_cast<CursorKind>(kind);
+	}
+
+	CursorLanguage Cursor::Language::get() {
+		return static_cast<CursorLanguage>(clang_getCursorLanguage(Native));
 	}
 
 	Cursor^ Cursor::GetLexicalParent() {

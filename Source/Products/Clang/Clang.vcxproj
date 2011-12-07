@@ -107,10 +107,13 @@
     <ClCompile Include="Type.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Dependencies\Clang\include\Index.h" />
+    <ClInclude Include="CallingConvention.h" />
     <ClInclude Include="Context.h" />
     <ClInclude Include="ContextFlags.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="CursorKind.h" />
+    <ClInclude Include="CursorLanguage.h" />
     <ClInclude Include="CursorLinkage.h" />
     <ClInclude Include="CursorVisitorCallback.h" />
     <ClInclude Include="CursorVisitResult.h" />

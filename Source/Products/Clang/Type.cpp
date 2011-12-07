@@ -43,6 +43,11 @@ namespace Clang {
 		return static_cast<TypeKind>(kind);
 	}
 
+	CallingConvention Type::CallingConvention::get() {
+		return static_cast<Clang::CallingConvention>(clang_getFunctionTypeCallingConv(Native));
+	}
+
+
 	Type^ Type::PointeeType::get() {
 		CXType t = clang_getPointeeType(Native);
 		if (t.kind == CXType_Invalid)
@@ -75,6 +80,34 @@ namespace Clang {
 			return gcnew Clang::Type(t);
 	}
 
+	Type^ Type::ElementType::get() {
+		CXType t = clang_getElementType(Native);
+		if (t.kind == CXType_Invalid)
+			return nullptr;
+		else
+			return gcnew Clang::Type(t);
+	}
+
+	Clang::Type^ Type::GetArgumentType(unsigned i) {
+		CXType t = clang_getArgType(Native, i);
+		if (t.kind == CXType_Invalid)
+			return nullptr;
+		else
+			return gcnew Clang::Type(t);
+	}
+
+	unsigned Type::ArgumentCount::get() {
+		return clang_getNumArgTypes(Native);
+	}
+
+	long long Type::ElementCount::get() {
+		return clang_getNumElements(Native);
+	}
+
+	bool Type::IsFunctionVariadic::get() {
+		return clang_isFunctionTypeVariadic(Native) != 0;
+	}
+
 	bool Type::IsConst::get() {
 		return clang_isConstQualifiedType(Native) != 0;
 	}
@@ -87,4 +120,7 @@ namespace Clang {
 		return clang_isRestrictQualifiedType(Native) != 0;
 	}
 
+	bool Type::IsPOD::get() {
+		return clang_isPODType(Native) != 0;
+	}
 }

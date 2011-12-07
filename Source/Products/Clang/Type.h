@@ -22,6 +22,7 @@
 
 #include "Index.h"
 #include "TypeKind.h"
+#include "CallingConvention.h"
 
 namespace Clang {
 
@@ -32,40 +33,80 @@ namespace Clang {
 			TypeKind get();
 		}
 
-		property Clang::Type^ PointeeType {
-			Clang::Type^ get();
-		}
+		//unsigned clang_equalTypes(CXType A, CXType B);
 
-		property Clang::Type^ ResultType {
-			Clang::Type^ get();
-		}
-
+		// CXType clang_getCanonicalType(CXType T);
 		property Clang::Type^ CanonicalType {
 			Clang::Type^ get();
 		}
 
-		property Clang::Type^ ArrayElementType {
-			Clang::Type^ get();
-		}
-
+		//unsigned clang_isConstQualifiedType(CXType T);
 		property bool IsConst {
 			bool get();
 		}
 
+		//unsigned clang_isVolatileQualifiedType(CXType T);
 		property bool IsVolatile {
 			bool get();
 		}
 
+		//unsigned clang_isRestrictQualifiedType(CXType T);
 		property bool IsRestrict {
 			bool get();
 		}
 
-		//TODO:
-		//unsigned clang_equalTypes(CXType A, CXType B);
+		//CXType clang_getPointeeType(CXType T);
+		property Clang::Type^ PointeeType {
+			Clang::Type^ get();
+		}
+
 		//CXCursor clang_getTypeDeclaration(CXType T);
 
 		//CXString clang_getTypeKindSpelling(enum CXTypeKind K);
+
+		//enum CXCallingConv clang_getFunctionTypeCallingConv(CXType T);
+		property Clang::CallingConvention CallingConvention {
+			Clang::CallingConvention get();
+		}
+
+		//CXType clang_getResultType(CXType T);
+		property Clang::Type^ ResultType {
+			Clang::Type^ get();
+		}
+
+		//unsigned clang_getNumArgTypes(CXType T);
+		property unsigned ArgumentCount {
+			unsigned get();
+		}
+
+		//CXType clang_getArgType(CXType T, unsigned i);
+		Clang::Type^ GetArgumentType(unsigned i);
+
+		//unsigned clang_isFunctionTypeVariadic(CXType T);
+		property bool IsFunctionVariadic {
+			bool get();
+		}
+
 		//unsigned clang_isPODType(CXType T);
+		property bool IsPOD {
+			bool get();
+		}
+
+		//CXType clang_getElementType(CXType T);
+		property Clang::Type^ ElementType {
+			Clang::Type^ get();
+		}
+
+		//long long clang_getNumElements(CXType T);
+		property long long ElementCount {
+			long long get();
+		}
+
+		//CXType clang_getArrayElementType(CXType T);
+		property Clang::Type^ ArrayElementType {
+			Clang::Type^ get();
+		}
+
 		//long long clang_getArraySize(CXType T);
 
 	internal:

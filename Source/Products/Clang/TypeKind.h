@@ -73,6 +73,7 @@ namespace Clang {
 		ObjectiveCObjectPointer = CXType_ObjCObjectPointer,
 		FunctionNoPrototype = CXType_FunctionNoProto,
 		FunctionPrototype = CXType_FunctionProto,
-		ConstantArray = CXType_ConstantArray
+		ConstantArray = CXType_ConstantArray,
+		Vector = CXType_Vector
 	};
 }
