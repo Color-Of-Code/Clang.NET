@@ -37,7 +37,7 @@ namespace AstPrint {
 				// example of use of arguments
 				List<string> parameters = new List<string>();
 				
-				//parameters.Add("-std=c89"); // works only for C of course
+				parameters.Add("-std=c89"); // works only for C of course
 				//parameters.Add("-nostdinc");
 
 				using (var translationUnit = new TranslationUnit (context, FILENAME, 

@@ -22,8 +22,8 @@
 
 #include "Index.h"
 #include "CursorKind.h"
-#include "CursorLanguage.h"
-#include "CursorLinkage.h"
+#include "LanguageKind.h"
+#include "LinkageKind.h"
 #include "CursorVisitorCallback.h"
 #include "CursorVisitResult.h"
 #include "Type.h"
@@ -51,8 +51,8 @@ namespace Clang {
 			System::String^ get(); 
 		}
 
-		property CursorLinkage Linkage {
-			CursorLinkage get(); 
+		property LinkageKind Linkage {
+			LinkageKind get(); 
 		}
 
 		property SourceLocation Location {
@@ -123,8 +123,8 @@ namespace Clang {
 			unsigned get();
 		}
 
-		property CursorLanguage Language {
-			CursorLanguage get();
+		property LanguageKind Language {
+			LanguageKind get();
 		}
 
 		Cursor^ GetLexicalParent();

@@ -1,4 +1,4 @@
-// Copyright (c) 2011 Jaap de Haan
+// File auto-generated using ClangGenerator.
 //	
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,10 +23,13 @@
 #include "Index.h"
 
 namespace Clang {
-	public enum class CursorLanguage {
-		Invalid = CXLanguage_Invalid,
-		C = CXLanguage_C,
-		ObjectiveC = CXLanguage_ObjC,
-		Cpp = CXLanguage_CPlusPlus
-	};
+
+    public enum class LanguageKind    {
+        Invalid = CXLanguage_Invalid,
+        C = CXLanguage_C,
+        ObjectiveC = CXLanguage_ObjC,
+        CPlusPlus = CXLanguage_CPlusPlus,
+    };
+
 }
+

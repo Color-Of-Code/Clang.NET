@@ -113,11 +113,11 @@
     <ClInclude Include="ContextFlags.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="CursorKind.h" />
-    <ClInclude Include="CursorLanguage.h" />
-    <ClInclude Include="CursorLinkage.h" />
     <ClInclude Include="CursorVisitorCallback.h" />
     <ClInclude Include="CursorVisitResult.h" />
     <ClInclude Include="Diagnostic.h" />
+    <ClInclude Include="LanguageKind.h" />
+    <ClInclude Include="LinkageKind.h" />
     <ClInclude Include="SourceFile.h" />
     <ClInclude Include="Location.h" />
     <ClInclude Include="SourceLocation.h" />

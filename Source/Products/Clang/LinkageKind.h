@@ -1,4 +1,4 @@
-// Copyright (c) 2011 Josh Petrie
+// File auto-generated using ClangGenerator.
 //	
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +23,14 @@
 #include "Index.h"
 
 namespace Clang {
-	public enum class CursorLinkage {
-		Invalid = CXLinkage_Invalid,
-		None = CXLinkage_NoLinkage,
-		Internal = CXLinkage_Internal,
-		ExternalUnique = CXLinkage_UniqueExternal,
-		External = CXLinkage_External,
-	};
+
+    public enum class LinkageKind    {
+        Invalid = CXLinkage_Invalid,
+        NoLinkage = CXLinkage_NoLinkage,
+        Internal = CXLinkage_Internal,
+        UniqueExternal = CXLinkage_UniqueExternal,
+        External = CXLinkage_External,
+    };
+
 }
+

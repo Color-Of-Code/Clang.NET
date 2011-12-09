@@ -77,8 +77,8 @@ namespace Clang {
 		return cachedSpelling;
 	}
 
-	CursorLinkage Cursor::Linkage::get() {
-		return static_cast<CursorLinkage>(clang_getCursorLinkage(Native));
+	LinkageKind Cursor::Linkage::get() {
+		return static_cast<LinkageKind>(clang_getCursorLinkage(Native));
 	}
 
 	SourceLocation Cursor::Location::get() {
@@ -155,8 +155,8 @@ namespace Clang {
 		return static_cast<CursorKind>(kind);
 	}
 
-	CursorLanguage Cursor::Language::get() {
-		return static_cast<CursorLanguage>(clang_getCursorLanguage(Native));
+	LanguageKind Cursor::Language::get() {
+		return static_cast<LanguageKind>(clang_getCursorLanguage(Native));
 	}
 
 	Cursor^ Cursor::GetLexicalParent() {

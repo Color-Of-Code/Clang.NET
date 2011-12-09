@@ -9,6 +9,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Clang", "Source\Products\Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstPrint", "Source\Samples\AstPrint\AstPrint.csproj", "{6DF4B1D5-B6E0-4629-9233-61EC81670D09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analyze", "Source\Samples\Analyze\Analyze.csproj", "{A2A25312-526B-4278-A83B-E4E8CC4BEE6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClangGenerator", "Source\Products\ClangGenerator\ClangGenerator.csproj", "{00CF8B5C-5D8D-44BE-8C6E-D29F516356DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -33,12 +37,30 @@ Global
 		{6DF4B1D5-B6E0-4629-9233-61EC81670D09}.Release|Mixed Platforms.Build.0 = Release|x86
 		{6DF4B1D5-B6E0-4629-9233-61EC81670D09}.Release|x86.ActiveCfg = Release|x86
 		{6DF4B1D5-B6E0-4629-9233-61EC81670D09}.Release|x86.Build.0 = Release|x86
+		{A2A25312-526B-4278-A83B-E4E8CC4BEE6B}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{A2A25312-526B-4278-A83B-E4E8CC4BEE6B}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{A2A25312-526B-4278-A83B-E4E8CC4BEE6B}.Debug|x86.ActiveCfg = Debug|x86
+		{A2A25312-526B-4278-A83B-E4E8CC4BEE6B}.Debug|x86.Build.0 = Debug|x86
+		{A2A25312-526B-4278-A83B-E4E8CC4BEE6B}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{A2A25312-526B-4278-A83B-E4E8CC4BEE6B}.Release|Mixed Platforms.Build.0 = Release|x86
+		{A2A25312-526B-4278-A83B-E4E8CC4BEE6B}.Release|x86.ActiveCfg = Release|x86
+		{A2A25312-526B-4278-A83B-E4E8CC4BEE6B}.Release|x86.Build.0 = Release|x86
+		{00CF8B5C-5D8D-44BE-8C6E-D29F516356DC}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{00CF8B5C-5D8D-44BE-8C6E-D29F516356DC}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{00CF8B5C-5D8D-44BE-8C6E-D29F516356DC}.Debug|x86.ActiveCfg = Debug|x86
+		{00CF8B5C-5D8D-44BE-8C6E-D29F516356DC}.Debug|x86.Build.0 = Debug|x86
+		{00CF8B5C-5D8D-44BE-8C6E-D29F516356DC}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{00CF8B5C-5D8D-44BE-8C6E-D29F516356DC}.Release|Mixed Platforms.Build.0 = Release|x86
+		{00CF8B5C-5D8D-44BE-8C6E-D29F516356DC}.Release|x86.ActiveCfg = Release|x86
+		{00CF8B5C-5D8D-44BE-8C6E-D29F516356DC}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6DF4B1D5-B6E0-4629-9233-61EC81670D09} = {BAD216AC-745E-40FE-A9C1-B7D3DCACD8E5}
+		{A2A25312-526B-4278-A83B-E4E8CC4BEE6B} = {BAD216AC-745E-40FE-A9C1-B7D3DCACD8E5}
 		{F6F8C16D-2018-4E6A-BF06-DA6009C9CF0B} = {8AAC2EF5-FF08-4297-A8E9-46D90646049E}
+		{00CF8B5C-5D8D-44BE-8C6E-D29F516356DC} = {8AAC2EF5-FF08-4297-A8E9-46D90646049E}
 	EndGlobalSection
 EndGlobal
