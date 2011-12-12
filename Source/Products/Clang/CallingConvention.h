@@ -1,4 +1,4 @@
-// Copyright (c) 2011 Jaap de Haan
+// File auto-generated using ClangGenerator.
 //	
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,17 +23,19 @@
 #include "Index.h"
 
 namespace Clang {
-	public enum class CallingConvention {
-		Default = CXCallingConv_Default,
-		C = CXCallingConv_C,
-		Stdcall = CXCallingConv_X86StdCall,
-		Fastcall = CXCallingConv_X86FastCall,
-		Thiscall = CXCallingConv_X86ThisCall,
-		Pascal = CXCallingConv_X86Pascal,
-		AAPCS = CXCallingConv_AAPCS,
-		AAPCS_VFP = CXCallingConv_AAPCS_VFP,
-		
-		Invalid = CXCallingConv_Invalid,
-		Unexposed = CXCallingConv_Unexposed
-	};
+
+    public enum class CallingConvention    {
+        Default = CXCallingConv_Default,
+        C = CXCallingConv_C,
+        X86StdCall = CXCallingConv_X86StdCall,
+        X86FastCall = CXCallingConv_X86FastCall,
+        X86ThisCall = CXCallingConv_X86ThisCall,
+        X86Pascal = CXCallingConv_X86Pascal,
+        AAPCS = CXCallingConv_AAPCS,
+        AAPCS_VFP = CXCallingConv_AAPCS_VFP,
+        Invalid = CXCallingConv_Invalid,
+        Unexposed = CXCallingConv_Unexposed,
+    };
+
 }
+

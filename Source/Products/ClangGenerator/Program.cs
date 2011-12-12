@@ -62,15 +62,24 @@ namespace ClangGenerator {
 					}
 				}
 			}
+			foreach (var group in _functions.GroupBy (x => x.FirstParameterType)) {
+				Console.WriteLine (group.Key);
+				foreach (var func in group) {
+					Console.WriteLine ("    {0}", func.Name);
+				}
+			}
 		}
 
 		private static int _depth = 0;
 		private static bool _locked = true;
 
+		private static List<FunctionParser> _functions = new List<FunctionParser> ();
+
 		private static CursorVisitResult RecursiveCursorVisitor (Cursor cursor, Cursor parent)
 		{
 			if (cursor.Location.SpellingPosition.File.Path == fi.FullName) {
 				_locked = false;
+#if _DEBUG
 				StringBuilder sb = new StringBuilder ();
 				sb.Append ("  ");
 				sb.Append (' ', _depth * 2);
@@ -83,8 +92,19 @@ namespace ClangGenerator {
 				sb.Append (" - ");
 				sb.Append (cursor.Spelling);
 				Console.WriteLine (sb);
+#endif
 				if (cursor.Kind == CursorKind.EnumerationDeclaration) {
-					GenerateEnumerationWrapper (cursor);
+					EnumWrapper wrapper = new EnumWrapper (fi.Directory);
+					wrapper.Parse (cursor);
+				} else if (cursor.Kind == CursorKind.FunctionDeclaration) {
+					FunctionParser func = new FunctionParser ();
+					func.Parse (cursor);
+					Console.WriteLine (" -> {0,-24} {1}", func.ReturnType, func.Name);
+					foreach (string p in func.Parameters) {
+						var split = p.Split (':');
+						Console.WriteLine ("            {0,-24}   {1}", split[0], split[1]);
+					}
+					_functions.Add (func);
 				} else {
 					_depth++;
 					cursor.VisitChildren (RecursiveCursorVisitor);
@@ -96,68 +116,6 @@ namespace ClangGenerator {
 					_locked = true;
 				}
 			}
-
-			return CursorVisitResult.Continue;
-		}
-
-		private static StringBuilder _sb;
-
-		private static void GenerateEnumerationWrapper (Cursor cursor)
-		{
-			if (String.IsNullOrEmpty (cursor.Name))
-				return;
-			String enumName = cursor.Name.Substring (2).Replace ("_", "");
-			String filename = Path.Combine (fi.DirectoryName, enumName + ".h");
-			StringBuilder contents = new StringBuilder ();
-			contents.AppendLine (Template.Header);
-			contents.Append ("    public enum class ");
-			contents.Append (enumName);
-			contents.AppendLine ("    {");
-
-			// add values
-			_sb = contents;
-			cursor.VisitChildren (EnumVisitor);
-
-			contents.AppendLine ("    };");
-			contents.AppendLine (Template.Footer);
-			File.WriteAllText (filename, contents.ToString ());
-		}
-
-		private static CursorVisitResult EnumVisitor (Cursor cursor, Cursor parent)
-		{
-			String name = cursor.Name;
-			String typename = Regex.Replace(parent.Name, "^(.*)Kind$", "$1");
-			String newName = Regex.Replace(name, typename + "_", "");
-			newName = Regex.Replace(newName, "Stmt$", "Statement");
-			newName = Regex.Replace(newName, "Decl$", "Declaration");
-			newName = Regex.Replace(newName, "Attr$", "Attribute");
-			newName = Regex.Replace(newName, "Expr$", "Expression");
-			newName = Regex.Replace(newName, "Spec$", "Specification");
-			newName = Regex.Replace(newName, "Ptr$", "Pointer");
-			newName = Regex.Replace(newName, "Ref$", "Reference");
-			newName = Regex.Replace(newName, "Proto$", "Prototype");
-
-			newName = Regex.Replace(newName, "^Stmt", "Statement");
-			newName = Regex.Replace(newName, "^Decl([^a])", "Declaration$1");
-			newName = Regex.Replace(newName, "^Enum([^e])", "Enumeration$1");
-			newName = Regex.Replace(newName, "^Parm", "Parameter");
-			newName = Regex.Replace(newName, "^Var([^i])", "Variable$1");
-			newName = Regex.Replace(newName, "^CXX", "CPlusPlus");
-			newName = Regex.Replace(newName, "^GNU", "Gnu");
-			newName = Regex.Replace(newName, "^SEH", "WinSeh");
-			newName = Regex.Replace(newName, "^ObjC", "ObjectiveC");
-
-			newName = Regex.Replace(newName, "LitteralExpression$", "Litteral");
-
-			_sb.Append("        ");
-			if (newName.StartsWith("Last") || newName.StartsWith("First"))
-				_sb.Append("// ");
-			_sb.Append(newName);
-			_sb.Append(" = ");
-			_sb.Append(name);
-			_sb.AppendLine(",");
-			if (newName.StartsWith("Last"))
-				_sb.AppendLine();
 
 			return CursorVisitResult.Continue;
 		}

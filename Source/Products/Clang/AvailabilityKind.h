@@ -24,10 +24,11 @@
 
 namespace Clang {
 
-    public enum class CursorVisitResult    {
-        Break = CXChildVisit_Break,
-        Continue = CXChildVisit_Continue,
-        Recurse = CXChildVisit_Recurse,
+    public enum class AvailabilityKind    {
+        Available = CXAvailability_Available,
+        Deprecated = CXAvailability_Deprecated,
+        NotAvailable = CXAvailability_NotAvailable,
+        NotAccessible = CXAvailability_NotAccessible,
     };
 
 }

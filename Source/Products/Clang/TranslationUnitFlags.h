@@ -1,4 +1,4 @@
-// Copyright (c) 2011 Josh Petrie
+// File auto-generated using ClangGenerator.
 //	
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,13 +23,19 @@
 #include "Index.h"
 
 namespace Clang {
-	[System::Flags]
-	public enum class TranslationUnitFlags {
-		None = CXTranslationUnit_None,
-		DetailedPreprocessingRecord = CXTranslationUnit_DetailedPreprocessingRecord,
-		Incomplete = CXTranslationUnit_Incomplete,
-		PrecompiledPreamble = CXTranslationUnit_PrecompiledPreamble,
-		CacheCompletionResults = CXTranslationUnit_CacheCompletionResults,
-		NestedMacroExpansions = CXTranslationUnit_NestedMacroExpansions,
-	};
+
+    [System::Flags]
+    public enum class TranslationUnitFlags    {
+        None = CXTranslationUnit_None,
+        DetailedPreprocessingRecord = CXTranslationUnit_DetailedPreprocessingRecord,
+        Incomplete = CXTranslationUnit_Incomplete,
+        PrecompiledPreamble = CXTranslationUnit_PrecompiledPreamble,
+        CacheCompletionResults = CXTranslationUnit_CacheCompletionResults,
+        CPlusPlusPrecompiledPreamble = CXTranslationUnit_CXXPrecompiledPreamble,
+        CPlusPlusChainedPCH = CXTranslationUnit_CXXChainedPCH,
+        NestedMacroExpansions = CXTranslationUnit_NestedMacroExpansions,
+        NestedMacroInstantiations = CXTranslationUnit_NestedMacroInstantiations,
+    };
+
 }
+

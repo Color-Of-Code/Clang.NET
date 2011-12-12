@@ -24,10 +24,12 @@
 
 namespace Clang {
 
-    public enum class CursorVisitResult    {
-        Break = CXChildVisit_Break,
-        Continue = CXChildVisit_Continue,
-        Recurse = CXChildVisit_Recurse,
+    public enum class TokenKind    {
+        Punctuation = CXToken_Punctuation,
+        Keyword = CXToken_Keyword,
+        Identifier = CXToken_Identifier,
+        Literal = CXToken_Literal,
+        Comment = CXToken_Comment,
     };
 
 }

@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Dependencies\Clang\include\Index.h" />
+    <ClInclude Include="AvailabilityKind.h" />
     <ClInclude Include="CallingConvention.h" />
     <ClInclude Include="Context.h" />
     <ClInclude Include="ContextFlags.h" />
@@ -122,6 +123,7 @@
     <ClInclude Include="Location.h" />
     <ClInclude Include="SourceLocation.h" />
     <ClInclude Include="SourceRange.h" />
+    <ClInclude Include="TokenKind.h" />
     <ClInclude Include="TranslationUnit.h" />
     <ClInclude Include="TranslationUnitFlags.h" />
     <ClInclude Include="Type.h" />

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="Context.cpp" />
+    <ClCompile Include="Cursor.cpp" />
+    <ClCompile Include="Diagnostic.cpp" />
+    <ClCompile Include="SourceFile.cpp" />
+    <ClCompile Include="SourceLocation.cpp" />
+    <ClCompile Include="SourceRange.cpp" />
+    <ClCompile Include="TranslationUnit.cpp" />
+    <ClCompile Include="Type.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Context.h" />
+    <ClInclude Include="ContextFlags.h" />
+    <ClInclude Include="Cursor.h" />
+    <ClInclude Include="CursorVisitorCallback.h" />
+    <ClInclude Include="Diagnostic.h" />
+    <ClInclude Include="SourceFile.h" />
+    <ClInclude Include="Location.h" />
+    <ClInclude Include="SourceLocation.h" />
+    <ClInclude Include="SourceRange.h" />
+    <ClInclude Include="TranslationUnit.h" />
+    <ClInclude Include="Type.h" />
+    <ClInclude Include="AvailabilityKind.h">
+      <Filter>generated</Filter>
+    </ClInclude>
+    <ClInclude Include="CursorKind.h">
+      <Filter>generated</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkageKind.h">
+      <Filter>generated</Filter>
+    </ClInclude>
+    <ClInclude Include="LanguageKind.h">
+      <Filter>generated</Filter>
+    </ClInclude>
+    <ClInclude Include="TokenKind.h">
+      <Filter>generated</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeKind.h">
+      <Filter>generated</Filter>
+    </ClInclude>
+    <ClInclude Include="CursorVisitResult.h">
+      <Filter>generated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\Clang\include\Index.h">
+      <Filter>index</Filter>
+    </ClInclude>
+    <ClInclude Include="CallingConvention.h">
+      <Filter>generated</Filter>
+    </ClInclude>
+    <ClInclude Include="TranslationUnitFlags.h">
+      <Filter>generated</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="generated">
+      <UniqueIdentifier>{a62cd389-e84f-404c-89e6-5397b294d31e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="index">
+      <UniqueIdentifier>{481a2bd6-1160-4b24-9bc0-bfc294a05f5c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
