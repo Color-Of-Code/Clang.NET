@@ -26,7 +26,7 @@ namespace Clang {
 
     public enum class CursorKind    {
         UnexposedDeclaration = CXCursor_UnexposedDecl,
-        StructDeclaration = CXCursor_StructDecl,
+        StructureDeclaration = CXCursor_StructDecl,
         UnionDeclaration = CXCursor_UnionDecl,
         ClassDeclaration = CXCursor_ClassDecl,
         EnumerationDeclaration = CXCursor_EnumDecl,

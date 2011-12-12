@@ -43,6 +43,7 @@
     <Compile Include="FunctionParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StructureParser.cs" />
     <Compile Include="Template\Footer.cs" />
     <Compile Include="Template\Header.cs" />
   </ItemGroup>

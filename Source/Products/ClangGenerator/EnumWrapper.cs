@@ -69,6 +69,7 @@ namespace ClangGenerator {
 			newName = Regex.Replace (newName, "^Enum([^e])", "Enumeration$1");
 			newName = Regex.Replace (newName, "^Parm", "Parameter");
 			newName = Regex.Replace (newName, "^Var([^i])", "Variable$1");
+			newName = Regex.Replace (newName, "^Struct([^u])", "Structure$1");
 			newName = Regex.Replace (newName, "^CXX", "CPlusPlus");
 			newName = Regex.Replace (newName, "^GNU", "Gnu");
 			newName = Regex.Replace (newName, "^SEH", "WinSeh");
