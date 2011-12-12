@@ -38,6 +38,11 @@ namespace Clang {
 		native.data[1] = data1;
 		return native;
 	}
+	
+	bool Type::Equals(Object^ o) {
+		Clang::Type^ other =  dynamic_cast<Clang::Type^>(o);
+		return clang_equalTypes(Native, other->Native) != 0;
+	}
 
 	TypeKind Type::Kind::get() {
 		return static_cast<TypeKind>(kind);

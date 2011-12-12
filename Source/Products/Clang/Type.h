@@ -34,6 +34,7 @@ namespace Clang {
 		}
 
 		//unsigned clang_equalTypes(CXType A, CXType B);
+	    virtual bool Equals(Object^ o) override; 
 
 		// CXType clang_getCanonicalType(CXType T);
 		property Clang::Type^ CanonicalType {

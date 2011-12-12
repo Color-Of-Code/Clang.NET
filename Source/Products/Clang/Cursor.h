@@ -39,6 +39,8 @@ namespace Clang {
 	public:
 		Cursor(TranslationUnit^ translationUnit);
 
+		virtual bool Equals(Object^ o) override; 
+
 		property CursorKind Kind {
 			CursorKind get();
 		}

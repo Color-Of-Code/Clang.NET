@@ -29,7 +29,7 @@ namespace ClangGenerator {
 
 		private CursorVisitResult RecusiveVisitor (Cursor cursor, Cursor parent)
 		{
-			if (_cursor.Hash == parent.Hash)
+			if (_cursor.Equals (parent))
 				IsStructure = cursor.Type.Kind == TypeKind.Record;
 			if (cursor.Kind == CursorKind.FieldDeclaration) {
 				if (cursor.Type.Kind == TypeKind.ConstantArray) {
