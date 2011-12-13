@@ -29,12 +29,26 @@ namespace Clang {
 	public value class SourceLocation
 	{
 	public:
+		virtual bool Equals(Object^ o) override; 
+
+		property Location ExpansionPosition {
+			Location get();
+		}
+
+		//property Location PresumedPosition {
+		//	Location get();
+		//}
+
+		property Location InstantiationPosition {
+			Location get();
+		}
+
 		property Location SpellingPosition {
 			Location get();
 		}
 
-		property Location ExpansionPosition {
-			Location get();
+		property static SourceLocation Null {
+			SourceLocation get();
 		}
 
 	internal:

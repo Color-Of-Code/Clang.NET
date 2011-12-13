@@ -31,7 +31,7 @@ namespace Clang {
 		Context(ContextFlags flags);
 		~Context();
 
-		property System::String^ ClangVersion {
+		property static System::String^ ClangVersion {
 			System::String^ get();
 		}
 

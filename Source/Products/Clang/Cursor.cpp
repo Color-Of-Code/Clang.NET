@@ -55,11 +55,15 @@ namespace Clang {
 		data2 = native.data[2];
 	}
 
+	Cursor^ Cursor::Null::get() {
+		CXCursor cursor = clang_getNullCursor();
+		return gcnew Cursor(cursor);
+	}
+
 	bool Cursor::Equals(Object^ o) {
 		Cursor^ other =  dynamic_cast<Cursor^>(o);
 		return clang_equalCursors(Native, other->Native) != 0;
 	}
-
 
 	String^ Cursor::Name::get() {
 		if(cachedName == nullptr) {

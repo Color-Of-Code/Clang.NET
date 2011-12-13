@@ -43,7 +43,7 @@ namespace ClangGenerator {
 
 			using (var context = new Context ()) {
 
-				Console.WriteLine ("Information: {0}", context.ClangVersion);
+				Console.WriteLine ("Information: {0}", Context.ClangVersion);
 
 				List<string> parameters = new List<string> ();
 				parameters.Add ("-std=c99");
@@ -64,12 +64,12 @@ namespace ClangGenerator {
 			}
 
 
-			//foreach (var group in _functions.GroupBy (x => x.FirstParameterType)) {
-			//    Console.WriteLine (group.Key);
-			//    foreach (var func in group) {
-			//        Console.WriteLine ("    {0}", func.Name);
-			//    }
-			//}
+			foreach (var group in _functions.GroupBy (x => x.FirstParameterType)) {
+			    Console.WriteLine (group.Key);
+			    foreach (var func in group) {
+			        Console.WriteLine ("    {0}", func.Name);
+			    }
+			}
 		}
 
 		private static int _depth = 0;

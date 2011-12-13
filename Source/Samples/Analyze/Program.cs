@@ -34,7 +34,7 @@ namespace Analyze {
 		{
 			using (var context = new Context ()) {
 				
-				Console.WriteLine("Information: {0}", context.ClangVersion);
+				Console.WriteLine("Information: {0}", Context.ClangVersion);
 
 				// example of use of arguments
 				List<string> parameters = new List<string>();

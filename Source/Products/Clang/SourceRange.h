@@ -36,6 +36,16 @@ namespace Clang {
 			SourceLocation get();
 		}
 
+		property static SourceRange Null {
+			SourceRange get();
+		}
+
+		property bool IsNull {
+			bool get();
+		}
+
+		static SourceRange GetRange(SourceLocation begin, SourceLocation end);
+
 	internal:
 		SourceRange(const CXSourceRange& native);
 

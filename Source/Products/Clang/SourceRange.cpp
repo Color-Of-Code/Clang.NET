@@ -31,6 +31,20 @@ namespace Clang {
 		integer1 = native.end_int_data;
 	}
 
+	SourceRange SourceRange::GetRange(SourceLocation begin, SourceLocation end) {
+		CXSourceRange native = clang_getRange(begin.Native, end.Native);
+		return SourceRange(native);
+	}
+
+	SourceRange SourceRange::Null::get() {
+		CXSourceRange range = clang_getNullRange();
+		return SourceRange(range);
+	}
+
+	bool SourceRange::IsNull::get() {
+		return clang_Range_isNull(Native) != 0;
+	}
+
 	SourceLocation SourceRange::Start::get() {
 		return SourceLocation(clang_getRangeStart(Native));
 	}

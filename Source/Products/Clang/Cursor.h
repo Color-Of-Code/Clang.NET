@@ -41,6 +41,10 @@ namespace Clang {
 
 		virtual bool Equals(Object^ o) override; 
 
+		property static Cursor^ Null {
+			Cursor^ get();
+		}
+
 		property CursorKind Kind {
 			CursorKind get();
 		}

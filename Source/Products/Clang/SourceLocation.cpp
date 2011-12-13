@@ -31,12 +31,36 @@ namespace Clang {
 		integer = native.int_data;
 	}
 
-	Location SourceLocation::SpellingPosition::get() {
+	SourceLocation SourceLocation::Null::get() {
+		CXSourceLocation location = clang_getNullLocation();
+		return SourceLocation(location);
+	}
+
+	bool SourceLocation::Equals(Object^ o) {
+		SourceLocation^ other =  dynamic_cast<SourceLocation^>(o);
+		return clang_equalLocations(Native, other->Native) != 0;
+	}
+
+	//Location SourceLocation::PresumedPosition::get() {
+	//	CXString file;
+	//	unsigned int line;
+	//	unsigned int column;
+	//	clang_getPresumedLocation(Native, &file, &line, &column);
+	//	
+	//	Location result;
+	//	result.File = SourceFile(file);
+	//	result.Line = line;
+	//	result.Column = column;
+	//	result.Offset = 0;
+	//	return result;
+	//}
+
+	Location SourceLocation::InstantiationPosition::get() {
 		CXFile file;
 		unsigned int line;
 		unsigned int column;
 		unsigned int offset;
-		clang_getSpellingLocation(Native, &file, &line, &column, &offset);
+		clang_getInstantiationLocation(Native, &file, &line, &column, &offset);
 		
 		Location result;
 		result.File = SourceFile(file);
@@ -52,6 +76,21 @@ namespace Clang {
 		unsigned int column;
 		unsigned int offset;
 		clang_getExpansionLocation(Native, &file, &line, &column, &offset);
+		
+		Location result;
+		result.File = SourceFile(file);
+		result.Line = line;
+		result.Column = column;
+		result.Offset = offset;
+		return result;
+	}
+
+	Location SourceLocation::SpellingPosition::get() {
+		CXFile file;
+		unsigned int line;
+		unsigned int column;
+		unsigned int offset;
+		clang_getSpellingLocation(Native, &file, &line, &column, &offset);
 		
 		Location result;
 		result.File = SourceFile(file);

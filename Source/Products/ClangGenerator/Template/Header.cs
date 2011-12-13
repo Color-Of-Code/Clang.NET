@@ -9,8 +9,9 @@ namespace ClangGenerator {
 		{
 			get
 			{
-				return
-@"// File auto-generated using ClangGenerator.
+				String version = Clang.Context.ClangVersion;
+				return 
+@"// File auto-generated using ClangGenerator - " + version + @".
 //	
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the ""Software""), to deal
