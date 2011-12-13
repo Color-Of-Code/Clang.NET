@@ -620,6 +620,15 @@ CINDEX_LINKAGE CXDiagnostic clang_getDiagnostic(CXTranslationUnit Unit,
                                                 unsigned Index);
 
 /**
+ * \brief Retrieve the complete set of diagnostics associated with a
+ *        translation unit.
+ *
+ * \param Unit the translation unit to query.
+ */
+CINDEX_LINKAGE CXDiagnosticSet
+  clang_getDiagnosticSetFromTU(CXTranslationUnit Unit);  
+
+/**
  * \brief Destroy a diagnostic.
  */
 CINDEX_LINKAGE void clang_disposeDiagnostic(CXDiagnostic Diagnostic);
@@ -4134,10 +4143,16 @@ typedef enum {
   CXIdxEntity_CXXConstructor        = 22,
   CXIdxEntity_CXXDestructor         = 23,
   CXIdxEntity_CXXConversionFunction = 24,
-  CXIdxEntity_CXXTypeAlias          = 25,
-  CXIdxEntity_CXXInstanceVariable   = 26
+  CXIdxEntity_CXXTypeAlias          = 25
 
 } CXIdxEntityKind;
+
+typedef enum {
+  CXIdxEntityLang_None = 0,
+  CXIdxEntityLang_C    = 1,
+  CXIdxEntityLang_ObjC = 2,
+  CXIdxEntityLang_CXX  = 3
+} CXIdxEntityLanguage;
 
 /**
  * \brief Extra C++ template information for an entity. This can apply to:
@@ -4159,6 +4174,7 @@ typedef enum {
 typedef struct {
   CXIdxEntityKind kind;
   CXIdxEntityCXXTemplateKind templateKind;
+  CXIdxEntityLanguage lang;
   const char *name;
   const char *USR;
   CXCursor cursor;
@@ -4192,7 +4208,12 @@ typedef struct {
   const CXIdxEntityInfo *entityInfo;
   CXCursor cursor;
   CXIdxLoc loc;
-  const CXIdxContainerInfo *container;
+  const CXIdxContainerInfo *semanticContainer;
+  /**
+   * \brief Generally same as \see semanticContainer but can be different in
+   * cases like out-of-line C++ member functions.
+   */
+  const CXIdxContainerInfo *lexicalContainer;
   int isRedeclaration;
   int isDefinition;
   int isContainer;
@@ -4272,6 +4293,7 @@ typedef enum {
  * \brief Data for \see indexEntityReference callback.
  */
 typedef struct {
+  CXIdxEntityRefKind kind;
   /**
    * \brief Reference cursor.
    */
@@ -4296,7 +4318,6 @@ typedef struct {
    * \brief Container context of the reference.
    */
   const CXIdxContainerInfo *container;
-  CXIdxEntityRefKind kind;
 } CXIdxEntityRefInfo;
 
 typedef struct {
