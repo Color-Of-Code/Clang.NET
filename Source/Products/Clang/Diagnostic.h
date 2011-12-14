@@ -21,17 +21,51 @@
 #pragma once
 
 #include "Index.h"
+#include "DiagnosticSeverity.h"
 
 namespace Clang {
 	ref class TranslationUnit;
+	value class SourceLocation;
 
 	public ref class Diagnostic
 	{
 	public:
 		~Diagnostic();
 
+		System::String^ Format(unsigned options);
+
+		static property unsigned DefaultDisplayOptions {
+			unsigned get();
+		}
+
 		property System::String^ Spelling {
 			System::String^ get();
+		}
+
+		property SourceLocation Location {
+			SourceLocation get();
+		}
+
+		property unsigned Category {
+			unsigned get();
+		}
+
+		property System::String^ CategoryName {
+			System::String^ get();
+		}
+
+		static System::String^ GetCategoryName(unsigned category);
+
+		property unsigned RangeCount {
+			unsigned get();
+		}
+
+		property unsigned FixItsCount {
+			unsigned get();
+		}
+
+		property DiagnosticSeverity Severity {
+			DiagnosticSeverity get();
 		}
 
 	internal:

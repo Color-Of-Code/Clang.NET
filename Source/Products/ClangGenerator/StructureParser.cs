@@ -19,6 +19,16 @@ namespace ClangGenerator {
 
 		private Cursor _cursor;
 
+		public void Write (StringBuilder sb)
+		{
+			sb.AppendFormat ("private: {0}", Name);
+			sb.AppendLine(" {");
+			foreach (var p in Fields)
+				sb.AppendLine(p);
+			sb.AppendLine("}");
+			sb.AppendLine ();
+		}
+
 		public void Parse (Cursor cursor)
 		{
 			Name = cursor.Name;
@@ -33,10 +43,10 @@ namespace ClangGenerator {
 				IsStructure = cursor.Type.Kind == TypeKind.Record;
 			if (cursor.Kind == CursorKind.FieldDeclaration) {
 				if (cursor.Type.Kind == TypeKind.ConstantArray) {
-					String field = String.Format ("{0} ({1}[{2}])", cursor.Name, cursor.Type.ElementType.Kind, cursor.Type.ElementCount);
+					String field = String.Format ("    {1} {0}[{2}];", cursor.Name, cursor.Type.ElementType.Kind, cursor.Type.ElementCount);
 					Fields.Add (field);
 				} else {
-					String field = String.Format ("{0} ({1})", cursor.Name, cursor.Type.Kind);
+					String field = String.Format ("    {1} {0};", cursor.Name, cursor.Type.Kind);
 					Fields.Add (field);
 				}
 			}

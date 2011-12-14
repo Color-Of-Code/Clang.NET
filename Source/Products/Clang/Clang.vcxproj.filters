@@ -53,6 +53,12 @@
     <ClInclude Include="TranslationUnitFlags.h">
       <Filter>generated</Filter>
     </ClInclude>
+    <ClInclude Include="DiagnosticSeverity.h">
+      <Filter>generated</Filter>
+    </ClInclude>
+    <ClInclude Include="DiagnosticDisplayOptions.h">
+      <Filter>generated</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="generated">

@@ -117,6 +117,8 @@
     <ClInclude Include="CursorVisitorCallback.h" />
     <ClInclude Include="CursorVisitResult.h" />
     <ClInclude Include="Diagnostic.h" />
+    <ClInclude Include="DiagnosticDisplayOptions.h" />
+    <ClInclude Include="DiagnosticSeverity.h" />
     <ClInclude Include="LanguageKind.h" />
     <ClInclude Include="LinkageKind.h" />
     <ClInclude Include="SourceFile.h" />

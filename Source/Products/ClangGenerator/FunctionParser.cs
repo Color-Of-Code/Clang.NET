@@ -18,6 +18,19 @@ namespace ClangGenerator {
 		public String FirstParameterType { get; private set; }
 		public List<String> Parameters { get; private set; }
 
+		public void Write (StringBuilder sb)
+		{
+			if (Parameters.Count == 0)
+				sb.AppendFormat ("static {0,-20} {1} (", ReturnType, Name);
+			else
+				sb.AppendFormat ("{0,-20} {1} (", ReturnType, Name);
+			foreach (var p in Parameters.Skip (1)) {
+				sb.Append (p.Replace (":", " "));
+				sb.Append (", ");
+			}
+			sb.AppendLine (")");
+		}
+
 		public void Parse (Cursor cursor)
 		{
 			Name = cursor.Spelling;
@@ -31,8 +44,11 @@ namespace ClangGenerator {
 			}
 			Parameters = new List<string> ();
 			cursor.VisitChildren (ParseFunctionParameter);
-			if (Parameters.Count > 0)
+			if (Parameters.Count > 0) {
 				FirstParameterType = Regex.Replace (Parameters[0], "^(.*?):.*$", "$1");
+			} else {
+				FirstParameterType = ReturnType;
+			}
 		}
 
 		private String typename;

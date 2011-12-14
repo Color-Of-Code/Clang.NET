@@ -24,11 +24,13 @@
 
 namespace Clang {
 
-    public enum class LanguageKind    {
-        Invalid = CXLanguage_Invalid,
-        C = CXLanguage_C,
-        ObjectiveC = CXLanguage_ObjC,
-        CPlusPlus = CXLanguage_CPlusPlus,
+    public enum class DiagnosticDisplayOptions    {
+        DisplaySourceLocation = CXDiagnostic_DisplaySourceLocation,
+        DisplayColumn = CXDiagnostic_DisplayColumn,
+        DisplaySourceRanges = CXDiagnostic_DisplaySourceRanges,
+        DisplayOption = CXDiagnostic_DisplayOption,
+        DisplayCategoryId = CXDiagnostic_DisplayCategoryId,
+        DisplayCategoryName = CXDiagnostic_DisplayCategoryName,
     };
 
 }

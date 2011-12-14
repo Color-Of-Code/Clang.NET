@@ -24,11 +24,12 @@
 
 namespace Clang {
 
-    public enum class LanguageKind    {
-        Invalid = CXLanguage_Invalid,
-        C = CXLanguage_C,
-        ObjectiveC = CXLanguage_ObjC,
-        CPlusPlus = CXLanguage_CPlusPlus,
+    public enum class DiagnosticSeverity    {
+        Ignored = CXDiagnostic_Ignored,
+        Note = CXDiagnostic_Note,
+        Warning = CXDiagnostic_Warning,
+        Error = CXDiagnostic_Error,
+        Fatal = CXDiagnostic_Fatal,
     };
 
 }

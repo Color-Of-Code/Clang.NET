@@ -63,13 +63,23 @@ namespace ClangGenerator {
 				}
 			}
 
-
-			foreach (var group in _functions.GroupBy (x => x.FirstParameterType)) {
-			    Console.WriteLine (group.Key);
-			    foreach (var func in group) {
-			        Console.WriteLine ("    {0}", func.Name);
-			    }
-			}
+			//StringBuilder sb = new StringBuilder ();
+			//foreach (var group in _functions.GroupBy (x => x.FirstParameterType)) {
+			//    Console.WriteLine (group.Key);
+			//    sb.AppendLine();
+			//    sb.Append("class ");
+			//    sb.AppendLine(group.Key);
+			//    foreach (var func in group) {
+			//        func.Write (sb);
+			//    }
+			//}
+			//foreach (var structParser in _structures) {
+			//    structParser.Write (sb);
+			//}
+			//String contents = sb.ToString ();
+			//String filename = Path.Combine (fi.DirectoryName, "_methods.h");
+			//Console.WriteLine (contents);
+			//File.WriteAllText (filename, contents);
 		}
 
 		private static int _depth = 0;

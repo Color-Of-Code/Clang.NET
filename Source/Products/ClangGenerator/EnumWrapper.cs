@@ -54,6 +54,11 @@ namespace ClangGenerator {
 			cut = Regex.Replace (cut, "^(.*?)_?Flags$", "$1");
 			if (cut == "CXChildVisitResult")
 				cut = "CXChildVisit";
+			if (cut == "CXDiagnosticSeverity")
+				cut = "CXDiagnostic";
+			if (cut == "CXDiagnosticDisplayOptions")
+				cut = "CXDiagnostic";
+
 			String newName = Regex.Replace (name, cut + "_", "");
 			newName = Regex.Replace (newName, "Stmt$", "Statement");
 			newName = Regex.Replace (newName, "Decl$", "Declaration");

@@ -19,6 +19,7 @@
 // THE SOFTWARE.
 
 #include "Diagnostic.h"
+#include "SourceLocation.h"
 #include "TranslationUnit.h"
 
 using namespace System;
@@ -36,6 +37,18 @@ namespace Clang {
 		clang_disposeDiagnostic(Native);
 	}
 
+	System::String^ Diagnostic::Format(unsigned options) {
+		CXString formattedNative = clang_formatDiagnostic(Native, options);
+		const char* bytes = clang_getCString(formattedNative);
+		String^ formatted = gcnew String(bytes);
+		clang_disposeString(formattedNative);
+		return formatted;
+	}
+				
+	unsigned Diagnostic::DefaultDisplayOptions::get() {
+		return clang_defaultDiagnosticDisplayOptions();
+	}
+
 	System::String^ Diagnostic::Spelling::get() {
 		if(cachedSpelling == nullptr) {
 			CXString spelling = clang_getDiagnosticSpelling(Native);
@@ -45,6 +58,39 @@ namespace Clang {
 		}
 
 		return cachedSpelling;
+	}
+
+	SourceLocation Diagnostic::Location::get() {
+		CXSourceLocation location = clang_getDiagnosticLocation(Native);
+		return SourceLocation(location);
+	}
+
+	unsigned Diagnostic::RangeCount::get() {
+		return clang_getDiagnosticNumRanges(Native);
+	}
+
+	unsigned Diagnostic::FixItsCount::get() {
+		return clang_getDiagnosticNumFixIts(Native);
+	}
+
+	unsigned Diagnostic::Category::get() {
+		return clang_getDiagnosticCategory(Native);
+	}
+
+	System::String^ Diagnostic::CategoryName::get() {
+		return GetCategoryName(Category);
+	}
+
+	System::String^ Diagnostic::GetCategoryName(unsigned category) {
+		CXString categoryName = clang_getDiagnosticCategoryName(category);
+		const char* bytes = clang_getCString(categoryName);
+		String^ result = gcnew String(bytes);
+		clang_disposeString(categoryName);
+		return result;
+	}
+
+	DiagnosticSeverity Diagnostic::Severity::get() {
+		return static_cast<DiagnosticSeverity>(clang_getDiagnosticSeverity(Native));
 	}
 
 	CXDiagnostic Diagnostic::Native::get() {
