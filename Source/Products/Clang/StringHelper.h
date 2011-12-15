@@ -1,4 +1,4 @@
-// Copyright (c) 2011 Josh Petrie
+// Copyright (c) 2011 Jaap de Haan
 //	
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,41 +18,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "Context.h"
-#include "StringHelper.h"
+#pragma once
 
-using namespace System;
+#include "Index.h"
 
 namespace Clang {
-	Context::Context() {
-		Construct(ContextFlags::None);
-	}
-
-	Context::Context(ContextFlags flags) {
-		Construct(flags);
-	}
-
-	Context::~Context() {
-		clang_disposeIndex(Native);
-	}
-
-	Context::!Context() {
-		clang_disposeIndex(Native);
-	}
-
-	String^ Context::ClangVersion::get() {
-		CXString version = clang_getClangVersion();
-		return StringHelper::ConvertAndDispose(version);
-	}
-
-	void Context::Construct(ContextFlags flags) {
-		int excludeDeclarationsFromPch = static_cast<int>(flags & ContextFlags::ExcludeDeclarationsFromPch) != 0;
-		int displayDiagnostics = static_cast<int>(flags & ContextFlags::DisplayDiagnostics) != 0;
-
-		native = clang_createIndex(excludeDeclarationsFromPch, displayDiagnostics);
-	}
-
-	CXIndex Context::Native::get() {
-		return native;
-	}
+	public ref class StringHelper
+	{
+	public:
+		static System::String^ Convert(CXString str);
+		static System::String^ ConvertAndDispose(CXString str);
+	};
 }

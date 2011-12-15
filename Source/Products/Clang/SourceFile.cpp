@@ -19,6 +19,7 @@
 // THE SOFTWARE.
 
 #include "SourceFile.h"
+#include "StringHelper.h"
 
 using namespace System;
 
@@ -29,9 +30,7 @@ namespace Clang {
 	String^ SourceFile::Path::get() {
 		if(cachedPath == nullptr) {
 			CXString path = clang_getFileName(Native);
-			const char* bytes = clang_getCString(path);
-			cachedPath = gcnew String(bytes);
-			clang_disposeString(path);
+			cachedPath = StringHelper::ConvertAndDispose(path);
 		}
 
 		return cachedPath;

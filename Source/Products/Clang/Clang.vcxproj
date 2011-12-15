@@ -103,6 +103,7 @@
     <ClCompile Include="SourceFile.cpp" />
     <ClCompile Include="SourceLocation.cpp" />
     <ClCompile Include="SourceRange.cpp" />
+    <ClCompile Include="StringHelper.cpp" />
     <ClCompile Include="TranslationUnit.cpp" />
     <ClCompile Include="Type.cpp" />
   </ItemGroup>
@@ -125,6 +126,7 @@
     <ClInclude Include="Location.h" />
     <ClInclude Include="SourceLocation.h" />
     <ClInclude Include="SourceRange.h" />
+    <ClInclude Include="StringHelper.h" />
     <ClInclude Include="TokenKind.h" />
     <ClInclude Include="TranslationUnit.h" />
     <ClInclude Include="TranslationUnitFlags.h" />

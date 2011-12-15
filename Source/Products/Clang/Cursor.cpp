@@ -19,6 +19,7 @@
 // THE SOFTWARE.
 
 #include "Cursor.h"
+#include "StringHelper.h"
 #include "SourceLocation.h"
 #include "SourceRange.h"
 #include "TranslationUnit.h"
@@ -68,9 +69,7 @@ namespace Clang {
 	String^ Cursor::Name::get() {
 		if(cachedName == nullptr) {
 			CXString name = clang_getCursorDisplayName(Native);
-			const char* bytes = clang_getCString(name);
-			cachedName = gcnew String(bytes);
-			clang_disposeString(name);
+			cachedName = StringHelper::ConvertAndDispose(name);
 		}
 
 		return cachedName;
@@ -79,9 +78,7 @@ namespace Clang {
 	String^ Cursor::Spelling::get() {
 		if(cachedSpelling == nullptr) {
 			CXString spelling = clang_getCursorSpelling(Native);
-			const char* bytes = clang_getCString(spelling);
-			cachedSpelling = gcnew String(bytes);
-			clang_disposeString(spelling);
+			cachedSpelling = StringHelper::ConvertAndDispose(spelling);
 		}
 
 		return cachedSpelling;

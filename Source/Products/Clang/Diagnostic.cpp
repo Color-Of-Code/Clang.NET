@@ -19,6 +19,7 @@
 // THE SOFTWARE.
 
 #include "Diagnostic.h"
+#include "StringHelper.h"
 #include "SourceLocation.h"
 #include "TranslationUnit.h"
 
@@ -39,10 +40,7 @@ namespace Clang {
 
 	System::String^ Diagnostic::Format(unsigned options) {
 		CXString formattedNative = clang_formatDiagnostic(Native, options);
-		const char* bytes = clang_getCString(formattedNative);
-		String^ formatted = gcnew String(bytes);
-		clang_disposeString(formattedNative);
-		return formatted;
+		return StringHelper::ConvertAndDispose(formattedNative);
 	}
 				
 	unsigned Diagnostic::DefaultDisplayOptions::get() {
@@ -52,9 +50,7 @@ namespace Clang {
 	System::String^ Diagnostic::Spelling::get() {
 		if(cachedSpelling == nullptr) {
 			CXString spelling = clang_getDiagnosticSpelling(Native);
-			const char* bytes = clang_getCString(spelling);
-			cachedSpelling = gcnew String(bytes);
-			clang_disposeString(spelling);
+			cachedSpelling = StringHelper::ConvertAndDispose(spelling);
 		}
 
 		return cachedSpelling;
@@ -83,10 +79,7 @@ namespace Clang {
 
 	System::String^ Diagnostic::GetCategoryName(unsigned category) {
 		CXString categoryName = clang_getDiagnosticCategoryName(category);
-		const char* bytes = clang_getCString(categoryName);
-		String^ result = gcnew String(bytes);
-		clang_disposeString(categoryName);
-		return result;
+		return StringHelper::ConvertAndDispose(categoryName);
 	}
 
 	DiagnosticSeverity Diagnostic::Severity::get() {
