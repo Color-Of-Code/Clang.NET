@@ -26,6 +26,7 @@
 namespace Clang {
 	ref class Context;
 	ref class Diagnostic;
+	value class SourceFile;
 
 	public ref class TranslationUnit
 	{
@@ -37,6 +38,10 @@ namespace Clang {
 		property System::Collections::ObjectModel::ReadOnlyCollection<Diagnostic^>^ Diagnostics {
 			System::Collections::ObjectModel::ReadOnlyCollection<Diagnostic^>^ get();
 		}
+
+		SourceFile GetFile(System::String^ fileName);
+
+		bool IsFileMultipleIncludeGuarded(SourceFile file);
 
 	internal:
 		property CXTranslationUnit Native {

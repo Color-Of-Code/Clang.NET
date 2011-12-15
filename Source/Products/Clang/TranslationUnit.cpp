@@ -20,6 +20,7 @@
 
 #include "TranslationUnit.h"
 #include "Context.h"
+#include "SourceFile.h"
 #include "Diagnostic.h"
 
 #include <vector>
@@ -28,6 +29,7 @@ using namespace System;
 using namespace System::Collections::Generic;
 using namespace System::Collections::ObjectModel;
 using namespace System::Text;
+using namespace System::Runtime::InteropServices;
 
 namespace Clang {
 	TranslationUnit::TranslationUnit(Context^ context, String^ file, TranslationUnitFlags flags) {
@@ -81,6 +83,20 @@ namespace Clang {
 
 	TranslationUnit::!TranslationUnit() {
 		clang_disposeTranslationUnit(Native);
+	}
+
+
+	bool TranslationUnit::IsFileMultipleIncludeGuarded(SourceFile file) {
+		return clang_isFileMultipleIncludeGuarded(Native, file.Native) != 0;
+	}
+
+	SourceFile TranslationUnit::GetFile(System::String^ fileName) {
+		IntPtr ptr = Marshal::StringToHGlobalAnsi(fileName);
+		const char* str = (const char*)(void*)ptr;
+		CXFile file = clang_getFile (Native, str);
+		SourceFile result = SourceFile(file);
+		Marshal::FreeHGlobal(ptr);
+		return result;
 	}
 
 	ReadOnlyCollection<Diagnostic^>^ TranslationUnit::Diagnostics::get() {
