@@ -94,8 +94,8 @@ namespace Clang {
 	}
 
 	SourceRange Cursor::Extent::get() {
-		CXSourceRange location = clang_getCursorExtent(Native);
-		return SourceRange(location);
+		CXSourceRange range = clang_getCursorExtent(Native);
+		return SourceRange(range);
 	}
 
 	bool Cursor::IsUnexposed::get() {
@@ -148,6 +148,19 @@ namespace Clang {
 
 	bool Cursor::IsCxxMethodVirtual::get() {
 		return clang_CXXMethod_isVirtual(Native) != 0;
+	}
+
+	CursorKind Cursor::TemplateCursorKind::get() {
+		return static_cast<CursorKind>(clang_getTemplateCursorKind(Native));
+	}
+
+	Cursor^ Cursor::SpecializedCursorTemplate::get() {
+		return gcnew Cursor(clang_getSpecializedCursorTemplate(Native));
+	}
+
+	SourceRange Cursor::GetCursorReferenceNameRange(unsigned nameFlags, unsigned pieceIndex) {
+		CXSourceRange range = clang_getCursorReferenceNameRange(Native, nameFlags, pieceIndex);
+		return SourceRange(range);
 	}
 
 	//bool Cursor::IsNull::get() {

@@ -58,6 +58,8 @@ namespace ClangGenerator {
 				cut = "CXDiagnostic";
 			if (cut == "CXDiagnosticDisplayOptions")
 				cut = "CXDiagnostic";
+			if (cut == "CXNameRef")
+				cut = "CXNameRange";
 
 			String newName = Regex.Replace (name, cut + "_", "");
 			newName = Regex.Replace (newName, "Stmt$", "Statement");

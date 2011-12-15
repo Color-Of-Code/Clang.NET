@@ -121,6 +121,16 @@ namespace Clang {
 			bool get();
 		}
 
+		property CursorKind TemplateCursorKind {
+			CursorKind get();
+		}
+
+		property Cursor^ SpecializedCursorTemplate {
+			Cursor^ get();
+		}
+
+		SourceRange GetCursorReferenceNameRange(unsigned nameFlags, unsigned pieceIndex);
+
 		//property bool IsNull {
 		//	bool get();
 		//}
@@ -153,7 +163,6 @@ namespace Clang {
 		//CXCursor clang_getOverloadedDecl(CXCursor cursor, unsigned index);
 		//CXType clang_getIBOutletCollectionType(CXCursor);
 		//CXString clang_getCursorUSR(CXCursor);
-		//enum CXCursorKind clang_getTemplateCursorKind(CXCursor C);
 
 	internal:
 		Cursor(const CXCursor& native);

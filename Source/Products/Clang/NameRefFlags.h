@@ -24,11 +24,11 @@
 
 namespace Clang {
 
-    public enum class AvailabilityKind    {
-        Available = CXAvailability_Available,
-        Deprecated = CXAvailability_Deprecated,
-        NotAvailable = CXAvailability_NotAvailable,
-        NotAccessible = CXAvailability_NotAccessible,
+    [System::Flags]
+    public enum class NameRefFlags    {
+        WantQualifier = CXNameRange_WantQualifier,
+        WantTemplateArgs = CXNameRange_WantTemplateArgs,
+        WantSinglePiece = CXNameRange_WantSinglePiece,
     };
 
 }

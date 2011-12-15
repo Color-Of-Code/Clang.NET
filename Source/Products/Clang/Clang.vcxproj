@@ -122,6 +122,7 @@
     <ClInclude Include="DiagnosticSeverity.h" />
     <ClInclude Include="LanguageKind.h" />
     <ClInclude Include="LinkageKind.h" />
+    <ClInclude Include="NameRefFlags.h" />
     <ClInclude Include="SourceFile.h" />
     <ClInclude Include="Location.h" />
     <ClInclude Include="SourceLocation.h" />
