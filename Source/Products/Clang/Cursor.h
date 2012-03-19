@@ -131,9 +131,9 @@ namespace Clang {
 
 		SourceRange GetCursorReferenceNameRange(unsigned nameFlags, unsigned pieceIndex);
 
-		//property bool IsNull {
-		//	bool get();
-		//}
+		property bool IsNull {
+			bool get();
+		}
 
 		property unsigned Hash {
 			unsigned get();

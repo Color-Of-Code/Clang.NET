@@ -163,9 +163,9 @@ namespace Clang {
 		return SourceRange(range);
 	}
 
-	//bool Cursor::IsNull::get() {
-	//	return clang_Cursor_isNull(Native) != 0;
-	//}
+	bool Cursor::IsNull::get() {
+		return clang_Cursor_isNull(Native) != 0;
+	}
 
 	unsigned Cursor::Hash::get() {
 		return clang_hashCursor(Native);

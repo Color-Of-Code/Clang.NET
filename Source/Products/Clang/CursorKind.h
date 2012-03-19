@@ -1,4 +1,4 @@
-// File auto-generated using ClangGenerator - clang version 3.1 (trunk 146553).
+// File auto-generated using ClangGenerator - clang version 3.1 (trunk 153031).
 //	
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -78,6 +78,7 @@ namespace Clang {
         MemberReference = CXCursor_MemberRef,
         LabelReference = CXCursor_LabelRef,
         OverloadedDeclReference = CXCursor_OverloadedDeclRef,
+        VariableReference = CXCursor_VariableRef,
         // LastReference = CXCursor_LastRef,
 
         // FirstInvalid = CXCursor_FirstInvalid,
@@ -132,6 +133,8 @@ namespace Clang {
         ObjectiveCBridgedCastExpression = CXCursor_ObjCBridgedCastExpr,
         PackExpansionExpression = CXCursor_PackExpansionExpr,
         SizeOfPackExpression = CXCursor_SizeOfPackExpr,
+        LambdaExpression = CXCursor_LambdaExpr,
+        ObjectiveCBoolLiteralExpression = CXCursor_ObjCBoolLiteralExpr,
         // LastExpression = CXCursor_LastExpr,
 
         // FirstStatement = CXCursor_FirstStmt,

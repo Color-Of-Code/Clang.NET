@@ -993,28 +993,7 @@ enum CXTranslationUnit_Flags {
    * Note: this is a *temporary* option that is available only while
    * we are testing C++ precompiled preamble support. It is deprecated.
    */
-  CXTranslationUnit_CXXChainedPCH = 0x20,
-  
-  /**
-   * \brief Used to indicate that the "detailed" preprocessing record,
-   * if requested, should also contain nested macro expansions.
-   *
-   * Nested macro expansions (i.e., macro expansions that occur
-   * inside another macro expansion) can, in some code bases, require
-   * a large amount of storage to due preprocessor metaprogramming. Moreover,
-   * its fairly rare that this information is useful for libclang clients.
-   */
-  CXTranslationUnit_NestedMacroExpansions = 0x40,
-
-  /**
-   * \brief Legacy name to indicate that the "detailed" preprocessing record,
-   * if requested, should contain nested macro expansions.
-   *
-   * \see CXTranslationUnit_NestedMacroExpansions for the current name for this
-   * value, and its semantics. This is just an alias.
-   */
-  CXTranslationUnit_NestedMacroInstantiations =
-    CXTranslationUnit_NestedMacroExpansions
+  CXTranslationUnit_CXXChainedPCH = 0x20
 };
 
 /**
@@ -1500,7 +1479,13 @@ enum CXCursorKind {
    */
   CXCursor_OverloadedDeclRef             = 49,
   
-  CXCursor_LastRef                       = CXCursor_OverloadedDeclRef,
+  /**
+   * \brief A reference to a variable that occurs in some non-expression 
+   * context, e.g., a C++ lambda capture list.
+   */
+  CXCursor_VariableRef                   = 50,
+  
+  CXCursor_LastRef                       = CXCursor_VariableRef,
 
   /* Error conditions */
   CXCursor_FirstInvalid                  = 70,
@@ -1617,7 +1602,7 @@ enum CXCursorKind {
    */
   CXCursor_StmtExpr                      = 121,
 
-  /** \brief Represents a C1X generic selection.
+  /** \brief Represents a C11 generic selection.
    */
   CXCursor_GenericSelectionExpr          = 122,
 
@@ -1746,7 +1731,25 @@ enum CXCursorKind {
    */
   CXCursor_SizeOfPackExpr                = 143,
 
-  CXCursor_LastExpr                      = CXCursor_SizeOfPackExpr,
+  /* \brief Represents a C++ lambda expression that produces a local function
+   * object.
+   *
+   * \code
+   * void abssort(float *x, unsigned N) {
+   *   std::sort(x, x + N,
+   *             [](float a, float b) {
+   *               return std::abs(a) < std::abs(b);
+   *             });
+   * }
+   * \endcode
+   */
+  CXCursor_LambdaExpr                    = 144,
+  
+  /** \brief Objective-c Boolean Literal.
+   */
+  CXCursor_ObjCBoolLiteralExpr           = 145,
+
+  CXCursor_LastExpr                      = CXCursor_ObjCBoolLiteralExpr,
 
   /* Statements */
   CXCursor_FirstStmt                     = 200,
@@ -1984,7 +1987,7 @@ CINDEX_LINKAGE unsigned clang_equalCursors(CXCursor, CXCursor);
 /**
  * \brief Returns non-zero if \arg cursor is null.
  */
-int clang_Cursor_isNull(CXCursor);
+CINDEX_LINKAGE int clang_Cursor_isNull(CXCursor);
 
 /**
  * \brief Compute a hash value for the given cursor.
@@ -2089,7 +2092,7 @@ clang_getCursorAvailability(CXCursor cursor);
 /**
  * \brief Describe the "language" of the entity referred to by a cursor.
  */
-CINDEX_LINKAGE enum CXLanguageKind {
+enum CXLanguageKind {
   CXLanguage_Invalid = 0,
   CXLanguage_C,
   CXLanguage_ObjC,
@@ -2216,11 +2219,12 @@ CINDEX_LINKAGE CXCursor clang_getCursorLexicalParent(CXCursor cursor);
  * In both Objective-C and C++, a method (aka virtual member function,
  * in C++) can override a virtual method in a base class. For
  * Objective-C, a method is said to override any method in the class's
- * interface (if we're coming from an implementation), its protocols,
- * or its categories, that has the same selector and is of the same
- * kind (class or instance). If no such method exists, the search
- * continues to the class's superclass, its protocols, and its
- * categories, and so on.
+ * base class, its protocols, or its categories' protocols, that has the same
+ * selector and is of the same kind (class or instance).
+ * If no such method exists, the search continues to the class's superclass,
+ * its protocols, and its categories, and so on. A method from an Objective-C
+ * implementation is considered to override the same methods as its
+ * corresponding method in the interface.
  *
  * For C++, a virtual member function overrides any virtual member
  * function with the same signature that occurs in its base
@@ -3980,6 +3984,20 @@ typedef void *CXRemapping;
 CINDEX_LINKAGE CXRemapping clang_getRemappings(const char *path);
 
 /**
+ * \brief Retrieve a remapping.
+ *
+ * \param filePaths pointer to an array of file paths containing remapping info.
+ *
+ * \param numFiles number of file paths.
+ *
+ * \returns the requested remapping. This remapping must be freed
+ * via a call to \c clang_remap_dispose(). Can return NULL if an error occurred.
+ */
+CINDEX_LINKAGE
+CXRemapping clang_getRemappingsFromFileList(const char **filePaths,
+                                            unsigned numFiles);
+
+/**
  * \brief Determine the number of remappings.
  */
 CINDEX_LINKAGE unsigned clang_remap_getNumFiles(CXRemapping);
@@ -4171,19 +4189,6 @@ typedef enum {
   CXIdxEntity_TemplateSpecialization = 3
 } CXIdxEntityCXXTemplateKind;
 
-typedef struct {
-  CXIdxEntityKind kind;
-  CXIdxEntityCXXTemplateKind templateKind;
-  CXIdxEntityLanguage lang;
-  const char *name;
-  const char *USR;
-  CXCursor cursor;
-} CXIdxEntityInfo;
-
-typedef struct {
-  CXCursor cursor;
-} CXIdxContainerInfo;
-
 typedef enum {
   CXIdxAttr_Unexposed     = 0,
   CXIdxAttr_IBAction      = 1,
@@ -4196,6 +4201,21 @@ typedef struct {
   CXCursor cursor;
   CXIdxLoc loc;
 } CXIdxAttrInfo;
+
+typedef struct {
+  CXIdxEntityKind kind;
+  CXIdxEntityCXXTemplateKind templateKind;
+  CXIdxEntityLanguage lang;
+  const char *name;
+  const char *USR;
+  CXCursor cursor;
+  const CXIdxAttrInfo *const *attributes;
+  unsigned numAttributes;
+} CXIdxEntityInfo;
+
+typedef struct {
+  CXCursor cursor;
+} CXIdxContainerInfo;
 
 typedef struct {
   const CXIdxAttrInfo *attrInfo;
@@ -4239,13 +4259,6 @@ typedef struct {
 } CXIdxObjCContainerDeclInfo;
 
 typedef struct {
-  const CXIdxObjCContainerDeclInfo *containerInfo;
-  const CXIdxEntityInfo *objcClass;
-  CXCursor classCursor;
-  CXIdxLoc classLoc;
-} CXIdxObjCCategoryDeclInfo;
-
-typedef struct {
   const CXIdxEntityInfo *base;
   CXCursor cursor;
   CXIdxLoc loc;
@@ -4267,6 +4280,20 @@ typedef struct {
   const CXIdxBaseClassInfo *superInfo;
   const CXIdxObjCProtocolRefListInfo *protocols;
 } CXIdxObjCInterfaceDeclInfo;
+
+typedef struct {
+  const CXIdxObjCContainerDeclInfo *containerInfo;
+  const CXIdxEntityInfo *objcClass;
+  CXCursor classCursor;
+  CXIdxLoc classLoc;
+  const CXIdxObjCProtocolRefListInfo *protocols;
+} CXIdxObjCCategoryDeclInfo;
+
+typedef struct {
+  const CXIdxDeclInfo *declInfo;
+  const CXIdxEntityInfo *getter;
+  const CXIdxEntityInfo *setter;
+} CXIdxObjCPropertyDeclInfo;
 
 typedef struct {
   const CXIdxDeclInfo *declInfo;
@@ -4311,11 +4338,12 @@ typedef struct {
    * \endcode
    * 
    * The parent of reference of type 'Foo' is the variable 'var'.
-   * parentEntity will be null for references inside statement bodies.
+   * For references inside statement bodies of functions/methods,
+   * the parentEntity will be the function/method.
    */
   const CXIdxEntityInfo *parentEntity;
   /**
-   * \brief Container context of the reference.
+   * \brief Lexical container context of the reference.
    */
   const CXIdxContainerInfo *container;
 } CXIdxEntityRefInfo;
@@ -4384,6 +4412,9 @@ clang_index_getObjCCategoryDeclInfo(const CXIdxDeclInfo *);
 CINDEX_LINKAGE const CXIdxObjCProtocolRefListInfo *
 clang_index_getObjCProtocolRefListInfo(const CXIdxDeclInfo *);
 
+CINDEX_LINKAGE const CXIdxObjCPropertyDeclInfo *
+clang_index_getObjCPropertyDeclInfo(const CXIdxDeclInfo *);
+
 CINDEX_LINKAGE const CXIdxIBOutletCollectionAttrInfo *
 clang_index_getIBOutletCollectionAttrInfo(const CXIdxAttrInfo *);
 
@@ -4451,7 +4482,19 @@ typedef enum {
    * for only one reference of an entity per source file that does not also
    * include a declaration/definition of the entity.
    */
-  CXIndexOpt_SuppressRedundantRefs = 0x1
+  CXIndexOpt_SuppressRedundantRefs = 0x1,
+
+  /**
+   * \brief Function-local symbols should be indexed. If this is not set
+   * function-local symbols will be ignored.
+   */
+  CXIndexOpt_IndexFunctionLocalSymbols = 0x2,
+
+  /**
+   * \brief Implicit function/class template instantiations should be indexed.
+   * If this is not set, implicit instantiations will be ignored.
+   */
+  CXIndexOpt_IndexImplicitTemplateInstantiations = 0x4
 } CXIndexOptFlags;
 
 /**
