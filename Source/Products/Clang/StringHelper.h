@@ -20,7 +20,7 @@
 
 #pragma once
 
-#include "Index.h"
+#include "clang-c/Index.h"
 
 namespace Clang {
 	public ref class StringHelper

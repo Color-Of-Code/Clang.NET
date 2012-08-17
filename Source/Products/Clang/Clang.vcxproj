@@ -108,7 +108,10 @@
     <ClCompile Include="Type.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Dependencies\Clang\include\Index.h" />
+    <ClInclude Include="..\..\..\Dependencies\Clang\include\clang-c\CXCompilationDatabase.h" />
+    <ClInclude Include="..\..\..\Dependencies\Clang\include\clang-c\CXString.h" />
+    <ClInclude Include="..\..\..\Dependencies\Clang\include\clang-c\Index.h" />
+    <ClInclude Include="..\..\..\Dependencies\Clang\include\clang-c\Platform.h" />
     <ClInclude Include="AvailabilityKind.h" />
     <ClInclude Include="CallingConvention.h" />
     <ClInclude Include="Context.h" />

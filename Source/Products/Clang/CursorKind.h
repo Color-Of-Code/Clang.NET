@@ -1,4 +1,4 @@
-// File auto-generated using ClangGenerator - clang version 3.1 (trunk 153031).
+// File auto-generated using ClangGenerator - clang version 3.1 (trunk 155185).
 //	
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -167,6 +167,7 @@ namespace Clang {
         WinSehTryStatement = CXCursor_SEHTryStmt,
         WinSehExceptStatement = CXCursor_SEHExceptStmt,
         WinSehFinallyStatement = CXCursor_SEHFinallyStmt,
+        MSAsmStatement = CXCursor_MSAsmStmt,
         NullStatement = CXCursor_NullStmt,
         DeclarationStatement = CXCursor_DeclStmt,
         // LastStatement = CXCursor_LastStmt,

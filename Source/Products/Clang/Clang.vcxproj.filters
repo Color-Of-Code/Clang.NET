@@ -45,9 +45,6 @@
     <ClInclude Include="CursorVisitResult.h">
       <Filter>generated</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Dependencies\Clang\include\Index.h">
-      <Filter>index</Filter>
-    </ClInclude>
     <ClInclude Include="CallingConvention.h">
       <Filter>generated</Filter>
     </ClInclude>
@@ -64,6 +61,18 @@
     <ClInclude Include="NameRefFlags.h">
       <Filter>generated</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\Clang\include\clang-c\CXCompilationDatabase.h">
+      <Filter>index\clang-c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\Clang\include\clang-c\CXString.h">
+      <Filter>index\clang-c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\Clang\include\clang-c\Index.h">
+      <Filter>index\clang-c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\Clang\include\clang-c\Platform.h">
+      <Filter>index\clang-c</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="generated">
@@ -71,6 +80,9 @@
     </Filter>
     <Filter Include="index">
       <UniqueIdentifier>{481a2bd6-1160-4b24-9bc0-bfc294a05f5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="index\clang-c">
+      <UniqueIdentifier>{0e5191c9-bf90-4eab-a866-75ba26b2583d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

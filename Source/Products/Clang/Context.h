@@ -20,7 +20,7 @@
 
 #pragma once
 
-#include "Index.h"
+#include "clang-c/Index.h"
 #include "ContextFlags.h"
 
 namespace Clang {
