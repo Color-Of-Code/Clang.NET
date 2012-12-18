@@ -1,4 +1,4 @@
-// File auto-generated using ClangGenerator - clang version 3.1 (trunk 155185).
+// File auto-generated using ClangGenerator - clang version 3.3 (trunk 170344).
 //	
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@ namespace Clang {
         Incomplete = CXTranslationUnit_Incomplete,
         PrecompiledPreamble = CXTranslationUnit_PrecompiledPreamble,
         CacheCompletionResults = CXTranslationUnit_CacheCompletionResults,
-        CPlusPlusPrecompiledPreamble = CXTranslationUnit_CXXPrecompiledPreamble,
+        ForSerialization = CXTranslationUnit_ForSerialization,
         CPlusPlusChainedPCH = CXTranslationUnit_CXXChainedPCH,
         SkipFunctionBodies = CXTranslationUnit_SkipFunctionBodies,
         IncludeBriefCommentsInCodeCompletion = CXTranslationUnit_IncludeBriefCommentsInCodeCompletion,

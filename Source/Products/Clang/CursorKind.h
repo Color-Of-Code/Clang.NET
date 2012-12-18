@@ -1,4 +1,4 @@
-// File auto-generated using ClangGenerator - clang version 3.1 (trunk 155185).
+// File auto-generated using ClangGenerator - clang version 3.3 (trunk 170344).
 //	
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -153,6 +153,7 @@ namespace Clang {
         ContinueStatement = CXCursor_ContinueStmt,
         BreakStatement = CXCursor_BreakStmt,
         ReturnStatement = CXCursor_ReturnStmt,
+        GCCAsmStatement = CXCursor_GCCAsmStmt,
         AsmStatement = CXCursor_AsmStmt,
         ObjectiveCAtTryStatement = CXCursor_ObjCAtTryStmt,
         ObjectiveCAtCatchStatement = CXCursor_ObjCAtCatchStmt,
@@ -191,6 +192,10 @@ namespace Clang {
         InclusionDirective = CXCursor_InclusionDirective,
         // FirstPreprocessing = CXCursor_FirstPreprocessing,
         // LastPreprocessing = CXCursor_LastPreprocessing,
+
+        ModuleImportDeclaration = CXCursor_ModuleImportDecl,
+        // FirstExtraDeclaration = CXCursor_FirstExtraDecl,
+        // LastExtraDeclaration = CXCursor_LastExtraDecl,
 
     };
 
