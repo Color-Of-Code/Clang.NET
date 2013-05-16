@@ -123,7 +123,7 @@ namespace Clang {
 		// directly contained in this class and CXType instances are
 		// rebuilt as needed.
 		CXTypeKind kind;
-		void* data0;
-		void* data1;
+		const void* data0;
+		const void* data1;
 	};
 }

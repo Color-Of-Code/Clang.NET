@@ -50,11 +50,11 @@ namespace Clang {
 			unsigned get();
 		}
 
-		property System::String^ CategoryName {
+		property System::String^ CategoryText {
 			System::String^ get();
 		}
 
-		static System::String^ GetCategoryName(unsigned category);
+		static System::String^ GetCategoryText(CXDiagnostic category);
 
 		property unsigned RangeCount {
 			unsigned get();

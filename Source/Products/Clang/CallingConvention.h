@@ -1,4 +1,4 @@
-// File auto-generated using ClangGenerator - clang version 3.3 (trunk 170344).
+// File auto-generated using ClangGenerator - clang version 3.4 (181997).
 //	
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,6 +34,7 @@ namespace Clang {
         AAPCS = CXCallingConv_AAPCS,
         AAPCS_VFP = CXCallingConv_AAPCS_VFP,
         PnaclCall = CXCallingConv_PnaclCall,
+        IntelOclBicc = CXCallingConv_IntelOclBicc,
         Invalid = CXCallingConv_Invalid,
         Unexposed = CXCallingConv_Unexposed,
     };

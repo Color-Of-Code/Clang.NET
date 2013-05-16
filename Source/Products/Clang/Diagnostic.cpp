@@ -73,12 +73,12 @@ namespace Clang {
 		return clang_getDiagnosticCategory(Native);
 	}
 
-	System::String^ Diagnostic::CategoryName::get() {
-		return GetCategoryName(Category);
+	System::String^ Diagnostic::CategoryText::get() {
+		return GetCategoryText(Native);
 	}
 
-	System::String^ Diagnostic::GetCategoryName(unsigned category) {
-		CXString categoryName = clang_getDiagnosticCategoryName(category);
+	System::String^ Diagnostic::GetCategoryText(CXDiagnostic category) {
+		CXString categoryName = clang_getDiagnosticCategoryText(category);
 		return StringHelper::ConvertAndDispose(categoryName);
 	}
 

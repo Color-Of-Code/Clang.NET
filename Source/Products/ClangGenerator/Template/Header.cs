@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Clang;
 
-namespace ClangGenerator {
-	partial class Template {
-		public static String Header
-		{
-			get
-			{
-				String version = Clang.Context.ClangVersion;
-				return 
-@"// File auto-generated using ClangGenerator - " + version + @".
+namespace ClangGenerator.Template
+{
+    partial class Template
+    {
+        public static String Header
+        {
+            get
+            {
+                String version = Context.ClangVersion;
+                return
+                    @"// File auto-generated using ClangGenerator - " + version + @".
 //	
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the ""Software""), to deal
@@ -37,7 +37,7 @@ namespace ClangGenerator {
 
 namespace Clang {
 ";
-			}
-		}
-	}
+            }
+        }
+    }
 }

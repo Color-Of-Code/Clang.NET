@@ -62,8 +62,8 @@ namespace Clang {
 		// CXSourceLocation is a structure, and thus cannot be directly contained
 		// inside a managed type. Instead, the members are directly contained in
 		// this class and the native object is rebuilt as needed.
-		void* pointer0;
-		void* pointer1;
+		const void* pointer0;
+		const void* pointer1;
 		unsigned int integer;
 	};
 }

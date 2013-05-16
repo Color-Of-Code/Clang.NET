@@ -181,8 +181,8 @@ namespace Clang {
 		// rebuilt as needed.
 		CXCursorKind kind;
 		int xdata;
-		void* data0;
-		void* data1;
-		void* data2;
+		const void* data0;
+		const void* data1;
+		const void* data2;
 	};
 }
