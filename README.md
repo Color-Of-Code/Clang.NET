@@ -1,6 +1,24 @@
 Clang.Net
 =========
 
+NOTE: OBSOLETE 
+
+Drawbacks of my old approach:
+
+ - used Managed C++
+ - needed to have the same compiler for compiling Clang and the wrapper
+ - was not able to support linux
+
+
+I consider now using following lib and contribute to it
+instead of continuing development here
+https://github.com/Microsoft/ClangSharp
+
+
+OLD CONTENT BELOW
+
+-------
+
 A managed wrapper for [clang](http://clang.llvm.org/).
 
 [Documentation](http://clang.llvm.org/doxygen/group__CINDEX.html)
